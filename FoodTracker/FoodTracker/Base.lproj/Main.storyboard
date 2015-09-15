@@ -51,9 +51,13 @@
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="hie-AO-fxn">
                                 <rect key="frame" x="20" y="193" width="320" height="320"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hie-AO-fxn" secondAttribute="height" multiplier="1:1" id="FLS-D3-5E5"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="zfe-qT-TZ9" appends="YES" id="0z5-fy-fdw"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <animations/>
@@ -70,9 +74,15 @@
                     <connections>
                         <outlet property="mealNameLabel" destination="HFR-7F-vgU" id="ph0-sN-hoQ"/>
                         <outlet property="nameTextField" destination="jaC-rX-iHd" id="HZt-YP-Ks2"/>
+                        <outlet property="photoImageView" destination="hie-AO-fxn" id="3Y2-c5-xyq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="zfe-qT-TZ9">
+                    <connections>
+                        <action selector="selectImageFromPhotoLibrary:" destination="BYZ-38-t0r" id="d5T-BS-Yxt"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="440" y="387"/>
         </scene>
