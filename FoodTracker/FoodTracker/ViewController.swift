@@ -9,8 +9,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate,
-        UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     // MARK: Properties
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -36,6 +35,7 @@ class ViewController: UIViewController, UITextFieldDelegate,
         mealNameLabel.text = textField.text
     }
     
+    // MARK: UIImagePickerControllerDelegate
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         // Dismiss the picker if the user canceled.
         dismissViewControllerAnimated(true, completion: nil)
@@ -68,7 +68,6 @@ class ViewController: UIViewController, UITextFieldDelegate,
         
         presentViewController(imagePickerController, animated: true, completion: nil)
     }
-    
     
     @IBAction func setDefaultLabelText(sender: UIButton) {
         mealNameLabel.text = "Default Text"
