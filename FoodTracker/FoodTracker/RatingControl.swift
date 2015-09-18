@@ -11,7 +11,11 @@ import UIKit
 class RatingControl: UIView {
 
     // MARK: Properties
-    var rating = 0
+    var rating = 0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
     var ratingButtons = [UIButton]()
     var spacing = 5
     var stars = 5
@@ -24,7 +28,7 @@ class RatingControl: UIView {
         let emptyStarImage = UIImage(named: "emptyStar")
         let filledStarImage = UIImage(named: "filledStar")
         
-        for _ in 0..<5 {
+        for _ in 0..<stars {
             let button = UIButton()
             
             button.setImage(emptyStarImage, forState: .Normal)
@@ -42,12 +46,12 @@ class RatingControl: UIView {
     override func layoutSubviews() {
         let buttonSize = Int(frame.size.height)
         var buttonFrame = CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize)
-        
-        // Offset each button's origin by the length of the button plus spacing.
+
         for (index, button) in ratingButtons.enumerate() {
-            buttonFrame.origin.x = CGFloat(index * (buttonSize + 5))
+            buttonFrame.origin.x = CGFloat(index * (buttonSize + spacing))
             button.frame = buttonFrame
         }
+        updateButtonSelectionStates()
     }
     
     override func intrinsicContentSize() -> CGSize {
@@ -59,8 +63,15 @@ class RatingControl: UIView {
     
     // MARK: Button Action
     func ratingButtonTapped(button: UIButton) {
-        // print console
-        print("Button pressed 👍")
+        rating = ratingButtons.indexOf(button)! + 1
+        updateButtonSelectionStates()
     }
+    
+    func updateButtonSelectionStates() {
+        for (index, button) in ratingButtons.enumerate() {
+            button.selected = index < rating
+        }
+    }
+
 
 }
