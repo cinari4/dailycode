@@ -18,11 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6CW-NK-mGa">
-                                <rect key="frame" x="20" y="80" width="560" height="493"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6CW-NK-mGa">
+                                <rect key="frame" x="20" y="80" width="560" height="451"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFR-7F-vgU">
-                                        <rect key="frame" x="0.0" y="0.0" width="87" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Meal Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFR-7F-vgU">
+                                        <rect key="frame" x="237" y="0.0" width="87" height="21"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,8 +42,8 @@
                                             <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kub-3M-2Fg"/>
                                         </connections>
                                     </button>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="OEg-fp-J0R">
-                                        <rect key="frame" x="0.0" y="117" width="320" height="320"/>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="OEg-fp-J0R">
+                                        <rect key="frame" x="120" y="75" width="320" height="320"/>
                                         <animations/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -53,8 +53,8 @@
                                             <outletCollection property="gestureRecognizers" destination="obw-ho-oen" appends="YES" id="ooK-tQ-UCV"/>
                                         </connections>
                                     </imageView>
-                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="vWm-DX-e69" customClass="RatingControl" customModule="FoodTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="449" width="240" height="44"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="vWm-DX-e69" customClass="RatingControl" customModule="FoodTracker" customModuleProvider="target">
+                                        <rect key="frame" x="160" y="407" width="240" height="44"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
@@ -63,6 +63,11 @@
                                     <constraint firstAttribute="trailing" secondItem="jaC-rX-iHd" secondAttribute="trailing" id="ekZ-bN-ujf"/>
                                     <constraint firstItem="jaC-rX-iHd" firstAttribute="leading" secondItem="6CW-NK-mGa" secondAttribute="leading" id="mYS-Oi-eKf"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="Gsp-Yw-kem"/>
+                                    </mask>
+                                </variation>
                             </stackView>
                         </subviews>
                         <animations/>
