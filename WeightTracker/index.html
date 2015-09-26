@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>WeightTracker</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="script/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+         <script src="script/jquery/jquery-2.1.4.js"></script>
+        <!-- Custom styles for this template -->
+
+        <script>
+            const POUNDS_TO_KILOGRAMS = 0.45359237;
+            function tellKg(lbs) {
+                return (lbs*POUNDS_TO_KILOGRAMS).toFixed(3);
+            }
+
+            function test_tellKg()  {
+                if(tellKg(45) != 20.412)
+                    alert("test fail");
+            }
+            $(document).ready(function(){
+                $( "#btnLbs" ).click(function() {
+                    alert(tellKg($("#inputLbs").val()));
+                });
+            });
+
+        </script>	 
+
+    </head>
+    <body>
+        <p>pounds to kg converter</p>
+        <input class="form-control" id="inputLbs" placeholder="Kilograms">
+        <input class="btn btn-default" id="btnLbs" type="button" value="convert">
+    </body>
+</html>
