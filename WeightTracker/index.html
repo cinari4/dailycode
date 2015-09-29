@@ -17,18 +17,33 @@
         <!-- Custom styles for this template -->
 
         <script>
-            const POUNDS_TO_KILOGRAMS = 0.45359237;
-            function tellKg(lbs) {
+            const POUNDS_TO_KILOGRAMS = 0.453592;
+            const KILOGRAMS_TO_POUNDS = 2.20462;
+            function lbsToKg(lbs) {
                 return (lbs*POUNDS_TO_KILOGRAMS).toFixed(3);
             }
 
-            function test_tellKg()  {
-                if(tellKg(45) != 20.412)
+            function kgToLbs(kg) {
+                return (kg*KILOGRAMS_TO_POUNDS).toFixed(3);
+            }
+
+            function test_lbsToKg()  {
+                if(lbsToKg(45) != 20.412)
                     alert("test fail");
             }
+
+            function test_kgTolbs()  {
+                if(kgToLbs(100) != 220.462)
+                    alert("test fail");
+            }
+
             $(document).ready(function(){
                 $( "#btnLbs" ).click(function() {
-                    alert(tellKg($("#inputLbs").val()));
+                    alert(lbsToKg($("#inputLbs").val()));
+                });
+
+                $( "#btnKg" ).click(function() {
+                    alert(kgToLbs($("#inputKg").val()));
                 });
             });
 
@@ -36,8 +51,16 @@
 
     </head>
     <body>
-        <p>pounds to kg converter</p>
-        <input class="form-control" id="inputLbs" placeholder="Kilograms">
-        <input class="btn btn-default" id="btnLbs" type="button" value="convert">
+        <div>
+            <p>pounds to kg converter</p>
+            <input class="form-control" id="inputLbs" placeholder="lbs">
+            <input class="btn btn-default" id="btnLbs" type="button" value="convert">
+        </div>
+
+        <div>
+            <p>kg to pounds converter</p>
+            <input class="form-control" id="inputKg" placeholder="kg">
+            <input class="btn btn-default" id="btnKg" type="button" value="convert">
+        </div>
     </body>
 </html>
