@@ -39,28 +39,48 @@
 
             $(document).ready(function(){
                 $( "#btnLbs" ).click(function() {
-                    alert(lbsToKg($("#inputLbs").val()));
+                   var result = lbsToKg($("#inputLbs").val());
+                   $("#outputLbs").text(result);
                 });
 
                 $( "#btnKg" ).click(function() {
-                    alert(kgToLbs($("#inputKg").val()));
+                    var result = kgToLbs($("#inputKg").val());
+                    $("#outputKg").text(result);
                 });
             });
 
-        </script>	 
+        </script>    
 
     </head>
     <body>
-        <div>
-            <p>pounds to kg converter</p>
-            <input class="form-control" id="inputLbs" placeholder="lbs">
-            <input class="btn btn-default" id="btnLbs" type="button" value="convert">
+
+        <p>pounds to kg converter</p>
+        <div class = "row">
+                <div class="col-md-1">
+                    <input class="form-control" id="inputLbs" placeholder="lbs">
+                </div>
+                <div class="col-md-1">
+                    <input class="btn btn-default" id="btnLbs" type="button" value="convert">
+                </div>
+                <div class="col-md-1">
+                    <p class="bg-success" id="outputLbs"></p>
+                </div>
+            </div>
         </div>
 
-        <div>
-            <p>kg to pounds converter</p>
-            <input class="form-control" id="inputKg" placeholder="kg">
-            <input class="btn btn-default" id="btnKg" type="button" value="convert">
+        <p>kg to pounds converter</p>
+        <div class = "row">
+            <div class="col-md-1">
+                <input class="form-control" id="inputKg" placeholder="kg">
+            </div>
+            <div class="col-md-1">
+                <input class="btn btn-default" id="btnKg" type="button" value="convert">
+            </div>
+            <div class="col-md-1">
+                    <p class="bg-success" id="outputKg"></p>
+            </div>
+
+                
         </div>
     </body>
 </html>
