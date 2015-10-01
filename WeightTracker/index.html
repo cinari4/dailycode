@@ -20,13 +20,50 @@
             const POUNDS_TO_KILOGRAMS = 0.453592;
             const KILOGRAMS_TO_POUNDS = 2.20462;
             const DEFAULT_BARBEL_KG = 20;
-            
+
             function lbsToKg(lbs) {
+                if(checkValidation(lbs))
+                    return false;
+
                 return (lbs*POUNDS_TO_KILOGRAMS).toFixed(3);
             }
 
             function kgToLbs(kg) {
+                if(checkValidation(kg))
+                    return false;
                 return (kg*KILOGRAMS_TO_POUNDS).toFixed(3);
+            }
+
+            function kgToBarbellPlate(kg) {
+                if(checkValidation(kg))
+                    return false;
+
+                var kgList = [20, 15, 10, 2.5, 1, 0.5];
+                var kgCount = [0, 0, 0, 0, 0, 0];
+                var kgRemain = kg - DEFAULT_BARBEL_KG;
+                var returnStr = "";
+
+                for(index=0; index<kgList.length; index++) {
+                    var divisor = parseInt(kgRemain/kgList[index]);
+                    if(divisor > 0){  
+                        kgCount[index] = divisor;
+                        kgRemain = kgRemain % kgList[index];
+                    }
+                }
+                
+                for(index=0; index<kgList.length; index++) {
+                    returnStr += (kgList[index] + "kg x " + kgCount[index] + "개\n");
+                }
+                returnStr += "나머지 : " + kgRemain;
+                return returnStr;
+            }
+
+            function checkValidation(val) {
+                if(val == null || isNaN(val) || val <= 0) {
+                   alert("invalid input data");
+                   return true;
+                }
+                return false;
             }
 
             // test case test_lbsToKg
@@ -41,15 +78,37 @@
                     alert("test fail");
             }
 
+            // test case test_kgToBarbellPlate
+            function test_kgToBarbellPlate()  {
+                var str = "20kg x 4개\n15kg x 0개\n10kg x 0개\n2.5kg x 0개\n1kg x 0개\n0.5kg x 0개\n나머지 : 0";
+                if(test_kgToBarbellPlate(100) != str)
+                    alert("test fail");
+            }
+
             $(document).ready(function(){
                 $( "#btnLbs" ).click(function() {
-                   var result = lbsToKg($("#inputLbs").val());
-                   $("#outputLbs").text(result + "kg");
+                    var result = lbsToKg($("#inputLbs").val());
+                    if(result)
+                        $("#outputLbs").text(result + "kg");
+                    else
+                        $("#outputLbs").text("");
                 });
 
                 $( "#btnKg" ).click(function() {
                     var result = kgToLbs($("#inputKg").val());
-                    $("#outputKg").text(result + "lbs");
+                    if(result)
+                        $("#outputKg").text(result + "lbs");
+                    else
+                        $("#outputKg").text("");
+
+                });
+
+                $( "#btnPlate" ).click(function() {
+                    var result = kgToBarbellPlate($("#inputPlate").val());
+                    if(result)
+                        $("#outputPlate").text(result);
+                    else
+                        $("#outputPlate").text("");
                 });
             });
 
@@ -94,8 +153,8 @@
             <div class="col-md-1">
                 <input class="btn btn-default" id="btnPlate" type="button" value="convert">
             </div>
-            <div class="col-md-1">
-                    <p class="bg-success" id="ouputPlate"></p>
+            <div class="col-md-3">
+                <textarea class="form-control" id="outputPlate" rows="10"></textarea>
             </div>
         </div>
     </body>
