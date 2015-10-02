@@ -10,10 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var kgText: UITextField!
+    @IBOutlet weak var lbsText: UITextField!
+    @IBOutlet weak var lbsLabel: UILabel!
+    @IBAction func convertLbs(sender: AnyObject) {
+        let lbsToKgRate = 0.453592
+        let inputLbs = ((lbsText.text! as NSString).doubleValue) * lbsToKgRate
+        let resultText = "Kg : \(inputLbs)"
+        lbsLabel.text = resultText
+    }
     
-    @IBAction func convertKg(sender: AnyObject) {
-        
+    @IBAction func textFieldReturn(sender: AnyObject) {
+        sender.resignFirstResponder()
     }
     
     override func viewDidLoad() {
