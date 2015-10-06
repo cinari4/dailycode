@@ -1,138 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <meta name="description" content="">
-        <meta name="author" content="">
 
-        <title>WeightTracker</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cinari4@gmail.com">
+    <meta name="author" content="cinari4@gmail.com">
 
-        <!-- Bootstrap core CSS -->
-        <link href="script/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <title>WeightTracker</title>
 
-         <script src="script/jquery/jquery-2.1.4.js"></script>
-        <!-- Custom styles for this template -->
+    <link href="script/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+    <script src="script/jquery/jquery-2.1.4.js"></script>
+    <script src="script/utils/convertutils.js"></script>
 
-        <script>
-            const POUNDS_TO_KILOGRAMS = 0.453592;
-            const KILOGRAMS_TO_POUNDS = 2.20462;
-            const DEFAULT_BARBEL_KG = 20;
-
-            function lbsToKg(lbs) {
-                if(checkValidation(lbs))
-                    return false;
-
-                return (lbs*POUNDS_TO_KILOGRAMS).toFixed(3);
-            }
-
-            function kgToLbs(kg) {
-                if(checkValidation(kg))
-                    return false;
-                return (kg*KILOGRAMS_TO_POUNDS).toFixed(3);
-            }
-
-            function kgToBarbellPlate(kg) {
-                if(checkValidation(kg))
-                    return false;
-
-                var kgList = [20, 15, 10, 2.5, 1, 0.5];
-                var kgCount = [0, 0, 0, 0, 0, 0];
-                var kgRemain = kg - DEFAULT_BARBEL_KG;
-                var returnStr = "";
-
-                for(index=0; index<kgList.length; index++) {
-                    var divisor = parseInt(kgRemain/kgList[index]);
-                    if(divisor > 0){  
-                        kgCount[index] = divisor;
-                        kgRemain = kgRemain % kgList[index];
-                    }
-                }
-                
-                for(index=0; index<kgList.length; index++) {
-                    returnStr += (kgList[index] + "kg x " + kgCount[index] + "개\n");
-                }
-                returnStr += "나머지 : " + kgRemain;
-                return returnStr;
-            }
-
-            function checkValidation(val) {
-                if(val == null || isNaN(val) || val <= 0) {
-                   alert("invalid input data");
-                   return true;
-                }
-                return false;
-            }
-
-            // test case test_lbsToKg
-            function test_lbsToKg()  {
-                if(lbsToKg(45) != 20.412)
-                    alert("test fail");
-            }
-
-            // test case test_kgTolbs
-            function test_kgTolbs()  {
-                if(kgToLbs(100) != 220.462)
-                    alert("test fail");
-            }
-
-            // test case test_kgToBarbellPlate
-            function test_kgToBarbellPlate()  {
-                var str = "20kg x 4개\n15kg x 0개\n10kg x 0개\n2.5kg x 0개\n1kg x 0개\n0.5kg x 0개\n나머지 : 0";
-                if(test_kgToBarbellPlate(100) != str)
-                    alert("test fail");
-            }
-
-            $(document).ready(function(){
-                $( "#btnLbs" ).click(function() {
-                    var result = lbsToKg($("#inputLbs").val());
-                    if(result)
-                        $("#outputLbs").text(result + "kg");
-                    else
-                        $("#outputLbs").text("");
-                });
-
-                $( "#btnKg" ).click(function() {
-                    var result = kgToLbs($("#inputKg").val());
-                    if(result)
-                        $("#outputKg").text(result + "lbs");
-                    else
-                        $("#outputKg").text("");
-
-                });
-
-                $( "#btnPlate" ).click(function() {
-                    var result = kgToBarbellPlate($("#inputPlate").val());
-                    if(result)
-                        $("#outputPlate").text(result);
-                    else
-                        $("#outputPlate").text("");
-                });
+    <script>
+        $(document).ready(function() {
+            $("#btnLbs").click(function() {
+                var result = lbsToKg($("#inputLbs").val());
+                if (result)
+                    $("#outputLbs").text(result + "kg");
+                else
+                    $("#outputLbs").text("");
             });
 
-        </script>    
+            $("#btnKg").click(function() {
+                var result = kgToLbs($("#inputKg").val());
+                if (result)
+                    $("#outputKg").text(result + "lbs");
+                else
+                    $("#outputKg").text("");
 
-    </head>
-    <body>
+            });
 
-        <p> pounds to kg converter </p>
-        <div class = "row">
-                <div class="col-md-1">
-                    <input class="form-control" id="inputLbs" placeholder="lbs">
-                </div>
-                <div class="col-md-1">
-                    <input class="btn btn-default" id="btnLbs" type="button" value="convert">
-                </div>
-                <div class="col-md-1">
-                    <p class="bg-success" id="outputLbs"></p>
-                </div>
+            $("#btnPlate").click(function() {
+                var result = kgToBarbellPlate($("#inputPlate").val());
+                if (result)
+                    $("#outputPlate").text(result);
+                else
+                    $("#outputPlate").text("");
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Weight Tracker</a>
             </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">무게변환(LBS/KG)</a>
+                    </li>
+                    <li><a href="#about">원판갯수</a>
+                    </li>
+                    <li><a href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="page-header">
+            <h1> 무게변환 </h1>
         </div>
 
-        <p> kg to pounds converter </p>
-        <div class = "row">
+        <p class="lead"> LBS to KG </p>
+        <div class="row">
+            <div class="col-md-1">
+                <input class="form-control" id="inputLbs" placeholder="lbs">
+            </div>
+            <div class="col-md-1">
+                <input class="btn btn-default" id="btnLbs" type="button" value="convert">
+            </div>
+            <div class="col-md-1">
+                <p class="bg-success" id="outputLbs"></p>
+            </div>
+        </div>
+        <br /><br />
+
+        <p class="lead"> KG to LBS </p>
+        <div class="row">
             <div class="col-md-1">
                 <input class="form-control" id="inputKg" placeholder="kg">
             </div>
@@ -140,13 +103,13 @@
                 <input class="btn btn-default" id="btnKg" type="button" value="convert">
             </div>
             <div class="col-md-1">
-                    <p class="bg-success" id="outputKg"></p>
+                <p class="bg-success" id="outputKg"></p>
             </div>
         </div>
+        <br /><br />
 
-        <p> how many barbell plate do I put on? </p>
-        <p> target weight kg :  </p>
-        <div class = "row">
+        <p class="lead"> how many barbell plate do I put on? target weight kg : </p>
+        <div class="row">
             <div class="col-md-1">
                 <input class="form-control" id="inputPlate" placeholder="kg">
             </div>
@@ -157,5 +120,19 @@
                 <textarea class="form-control" id="outputPlate" rows="10"></textarea>
             </div>
         </div>
-    </body>
+        <br /><br />
+
+    </div>
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">
+                <a href="https://www.facebook.com/pzstrength?fref=ts">powerzone facebook</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+
 </html>
