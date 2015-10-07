@@ -20,18 +20,17 @@
             $("#btnLbs").click(function() {
                 var result = lbsToKg($("#inputLbs").val());
                 if (result)
-                    $("#outputLbs").text(result + "kg");
+                    $("#outputLbs").val(result + "kg");
                 else
-                    $("#outputLbs").text("");
+                    $("#outputLbs").val("");
             });
 
             $("#btnKg").click(function() {
                 var result = kgToLbs($("#inputKg").val());
                 if (result)
-                    $("#outputKg").text(result + "lbs");
+                    $("#outputKg").val(result + "lbs");
                 else
-                    $("#outputKg").text("");
-
+                    $("#outputKg").val("");
             });
 
             $("#btnPlate").click(function() {
@@ -82,28 +81,28 @@
 
         <p class="lead"> LBS to KG </p>
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <input class="form-control" id="inputLbs" placeholder="lbs">
             </div>
             <div class="col-md-1">
                 <input class="btn btn-default" id="btnLbs" type="button" value="convert">
             </div>
-            <div class="col-md-1">
-                <p class="bg-success" id="outputLbs"></p>
+            <div class="col-md-2">
+                <input class="form-control" id="outputLbs">
             </div>
         </div>
         <br /><br />
 
         <p class="lead"> KG to LBS </p>
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <input class="form-control" id="inputKg" placeholder="kg">
             </div>
             <div class="col-md-1">
                 <input class="btn btn-default" id="btnKg" type="button" value="convert">
             </div>
-            <div class="col-md-1">
-                <p class="bg-success" id="outputKg"></p>
+            <div class="col-md-2">
+                <input class="form-control" id="outputKg">
             </div>
         </div>
         <br /><br />
