@@ -40,6 +40,32 @@
                 else
                     $("#outputPlate").text("");
             });
+
+            $("#divPlate").hide();
+
+            $("#menuConvert").click(function() {
+                $("#divConvert").show();
+                $("#divPlate").hide();
+                $("#menuConvert").addClass("active");
+                $("#menuPlate").removeClass("active");
+                $("#menuContact").removeClass("active");
+            });
+
+            $("#menuPlate").click(function() {
+                $("#divConvert").hide();
+                $("#divPlate").show();    
+                $("#menuConvert").removeClass("active");
+                $("#menuPlate").addClass("active");
+                $("#menuContact").removeClass("active");
+            });
+
+            $("#menuContact").click(function() {
+                $("#menuConvert").removeClass("active");
+                $("#menuPlate").removeClass("active");
+                $("#menuContact").addClass("active");
+            });
+
+
         });
     </script>
 
@@ -61,11 +87,14 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">무게변환(LBS/KG)</a>
+                    <li class="active" id="menuConvert">
+                        <a href="#">무게변환(LBS/KG)</a>
                     </li>
-                    <li><a href="#about">원판갯수</a>
+                    <li id="menuPlate">
+                        <a href="#plate">원판갯수</a>
                     </li>
-                    <li><a href="#contact">Contact</a>
+                    <li id="menuContact">
+                        <a href="#contact">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -75,51 +104,58 @@
 
     <!-- Begin page content -->
     <div class="container">
-        <div class="page-header">
-            <h1> 무게변환 </h1>
+        <div id="divConvert">
+            <div class="page-header">
+                <h1> 무게변환 </h1>
+            </div>
+
+            <p class="lead"> LBS to KG </p>
+            <div class="row">
+                <div class="col-md-2">
+                    <input class="form-control" id="inputLbs" placeholder="lbs">
+                </div>
+                <div class="col-md-1">
+                    <input class="btn btn-default" id="btnLbs" type="button" value="convert">
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control" id="outputLbs">
+                </div>
+            </div>
+            <br /><br />
+
+            <p class="lead"> KG to LBS </p>
+            <div class="row">
+                <div class="col-md-2">
+                    <input class="form-control" id="inputKg" placeholder="kg">
+                </div>
+                <div class="col-md-1">
+                    <input class="btn btn-default" id="btnKg" type="button" value="convert">
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control" id="outputKg">
+                </div>
+            </div>
+            <br /><br />
         </div>
 
-        <p class="lead"> LBS to KG </p>
-        <div class="row">
-            <div class="col-md-2">
-                <input class="form-control" id="inputLbs" placeholder="lbs">
+        <div id="divPlate">
+            <div class="page-header">
+                <h1> 바벨갯수 </h1>
             </div>
-            <div class="col-md-1">
-                <input class="btn btn-default" id="btnLbs" type="button" value="convert">
+            <p class="lead"> how many barbell plate do I put on? target weight kg : </p>
+            <div class="row">
+                <div class="col-md-1">
+                    <input class="form-control" id="inputPlate" placeholder="kg">
+                </div>
+                <div class="col-md-1">
+                    <input class="btn btn-default" id="btnPlate" type="button" value="convert">
+                </div>
+                <div class="col-md-3">
+                    <textarea class="form-control" id="outputPlate" rows="10"></textarea>
+                </div>
             </div>
-            <div class="col-md-2">
-                <input class="form-control" id="outputLbs">
-            </div>
+            <br /><br />
         </div>
-        <br /><br />
-
-        <p class="lead"> KG to LBS </p>
-        <div class="row">
-            <div class="col-md-2">
-                <input class="form-control" id="inputKg" placeholder="kg">
-            </div>
-            <div class="col-md-1">
-                <input class="btn btn-default" id="btnKg" type="button" value="convert">
-            </div>
-            <div class="col-md-2">
-                <input class="form-control" id="outputKg">
-            </div>
-        </div>
-        <br /><br />
-
-        <p class="lead"> how many barbell plate do I put on? target weight kg : </p>
-        <div class="row">
-            <div class="col-md-1">
-                <input class="form-control" id="inputPlate" placeholder="kg">
-            </div>
-            <div class="col-md-1">
-                <input class="btn btn-default" id="btnPlate" type="button" value="convert">
-            </div>
-            <div class="col-md-3">
-                <textarea class="form-control" id="outputPlate" rows="10"></textarea>
-            </div>
-        </div>
-        <br /><br />
 
     </div>
 
