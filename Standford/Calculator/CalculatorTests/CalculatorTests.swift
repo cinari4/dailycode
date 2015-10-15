@@ -1,15 +1,15 @@
 //
-//  FileExampleTests.swift
-//  FileExampleTests
+//  CalculatorTests.swift
+//  CalculatorTests
 //
-//  Created by ChoiMun gyu on 2015. 10. 15..
+//  Created by ChoiMun gyu on 2015. 10. 16..
 //  Copyright © 2015년 Apple Inc. All rights reserved.
 //
 
 import XCTest
-@testable import FileExample
+@testable import Calculator
 
-class FileExampleTests: XCTestCase {
+class CalculatorTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

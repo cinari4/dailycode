@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  FileExample
+//  Calculator
 //
-//  Created by ChoiMun gyu on 2015. 10. 15..
+//  Created by ChoiMun gyu on 2015. 10. 16..
 //  Copyright © 2015년 Apple Inc. All rights reserved.
 //
 
