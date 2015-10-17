@@ -32,19 +32,30 @@ class ViewController: UIViewController {
             enter()
         }
         switch operation {
-        case "×":
-            if operandStack.count >= 2 {
-                displayValue = operandStack.removeLast() * operandStack.removeLast()
-                enter()
-            }
-//        case "÷":
-//        case "+":
-//        case "−":
+        case "×": performOpertaion {$0 * $1}
+        case "÷": performOpertaion {$1 / $0}
+        case "+": performOpertaion {$0 + $1}
+        case "−": performOpertaion {$1 - $0}
+        case "√": performOpertaion { sqrt($0) }
+          
         default: break
         }
     }
     
+    private func performOpertaion(operation: (Double, Double) -> Double) {
+        if operandStack.count >= 2 {
+            displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
+            enter()
+        }
+    }
     
+    private func performOpertaion(operation: Double -> Double) {
+        if operandStack.count >= 1 {
+            displayValue = operation(operandStack.removeLast())
+            enter()
+        }
+    }
+
     var operandStack: Array<Double> = Array<Double>()
     @IBAction func enter() {
         isUserType = false
