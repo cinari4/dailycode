@@ -66,3 +66,119 @@ enum Op {
 // Reference (class)
 // stored in the heap and reference counted ( automatically)
 // constant pointers to a class(let) still can mutate by calling methods and changing properties
+// when passed as an argument, does not make a copy
+
+
+// Properties
+// Property Observers
+// Lazy Initialization
+
+/*
+    let image = UIImage(named: "foo")
+
+    if let image = UIImage(named: "foo"){
+        // image was successfully created
+    } else {
+        // couldn't create the image
+    }
+
+*/
+
+
+// Initialization
+// - Creating Objects
+// let x = CalculatorBrain()
+// let z = [String]()
+// let commaSeperatedArrayElements: String = ",".join(myArray)
+
+
+
+/*
+AnyObject
+    Special "Type"(actially it's a protocol)
+    used primarily for compatibility with existing object-c-based apis
+
+    var destinationViewController : AnyObject
+    var toolbarItems: [AnyObject]
+
+Casting AnyObject
+    we 'force' an AnyObject to be something else by 'casting' it using the as keyword...
+        let calVC = destinationViewController as CalculatorViewController
+
+    to protect against a crash, we can use if let with as?
+        if let calcVC = destinationViewController as? CalculatorViewController {...}
+        ... as? return an Optional
+
+    or we can check before we even try to do as with the is keyword...
+        if destinationViewController is CalculatorViewController { ... }
+
+Casting array of AnyObject
+    for item in toolbarItems {
+            if let toolbarItem = item as? UIBarButtonItem {
+                ..
+            }
+    }
+    
+    for toolbarItem in  toobarItems as [UIBarButtonItem]
+
+*/
+
+
+
+/* 
+    some Array<T> Methods
+
+    append(T)
+    insert(T, atIndex: Int)
+    splice(Array<T>, atIndex: Int)
+
+    removeAtIndex(Int)
+    removeRange(Range)
+    replaceRange(Range, [T])
+    sort(isOrderedBefore: (T, T) -> Bool)
+    
+    filter(includeElement: (T) -> Bool) -> [T]
+    map(transform: (T) -> U) -> [U]
+    reduce(initial: U, combile: (U, T) -> U) -> U
+*/
+
+
+
+/*
+String.Index
+    advance
+    splice
+    rangeOfString
+    description -> String
+    endIndex -> String.Index
+    hasPrefix(String) -> Bool
+    hasSuffix(String) -> Bool
+    toInt() -> Int?
+    capitalizedString -> String
+    lowercaseString -> String
+    uppercaseString -> String
+    join(Array) -> String
+    componentsSeperatedByString(String) -> [String]
+
+*/
+
+
+
+/*
+Type Conversion
+    let d: Dobule = 37.5
+    let f: Float = 37.5
+    let x = Int(d)
+    let xd = Double(x)
+    let cgf = CGFloat(d)
+    let a = Array("abc")
+    let s = String(["a","b"])
+*/
+
+
+/*
+Assertions
+    assert(()->Bool, "message")
+    assert(validation() != nil, "message")
+
+*/
