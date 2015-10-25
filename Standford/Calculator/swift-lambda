@@ -1,0 +1,31 @@
+
+swift lambda easy step to learn
+
+step 1
+
+    func divide(op1: Double, op2: Double) -> Double {
+        return op1 / op2
+    }
+
+
+step2
+
+    case "×": performOpertaion(
+        { (op1: Double, op2: Double) -> Double in
+            return op1 * op2
+        })
+
+step3 
+
+    case "×": performOpertaion(
+        { (op1, op2) -> Double in
+            return op1 * op2
+        })
+
+step4
+
+    case "×": performOpertaion(
+        { (op1, op2) in return op1 * op2
+        })    
+
+
