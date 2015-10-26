@@ -17,7 +17,11 @@ class FirstViewController: UIViewController {
         let image = UIImage(named: imageName);
         let imageView = UIImageView(image: image!);
         
-        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
+        let bounds = UIScreen.mainScreen().bounds
+        let screenWidth = bounds.size.width
+        let screenHeight = bounds.size.height
+        
+        imageView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
         view.addSubview(imageView)
 
     }
