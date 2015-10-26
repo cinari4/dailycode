@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA4CD2881BDE572600FC226A /* not-available.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA4CD2871BDE572600FC226A /* not-available.jpg */; settings = {ASSET_TAGS = (); }; };
 		FA80917A1BDBC5EF008BB896 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8091791BDBC5EF008BB896 /* AppDelegate.swift */; };
 		FA80917C1BDBC5EF008BB896 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA80917B1BDBC5EF008BB896 /* FirstViewController.swift */; };
 		FA80917E1BDBC5EF008BB896 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA80917D1BDBC5EF008BB896 /* SecondViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA4CD2871BDE572600FC226A /* not-available.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "not-available.jpg"; sourceTree = "<group>"; };
 		FA8091761BDBC5EF008BB896 /* RememberTheDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememberTheDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8091791BDBC5EF008BB896 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA80917B1BDBC5EF008BB896 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +60,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA4CD2851BDE572600FC226A /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				FA4CD2861BDE572600FC226A /* images */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		FA4CD2861BDE572600FC226A /* images */ = {
+			isa = PBXGroup;
+			children = (
+				FA4CD2871BDE572600FC226A /* not-available.jpg */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		FA80916D1BDBC5EF008BB896 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +97,7 @@
 		FA8091781BDBC5EF008BB896 /* RememberTheDay */ = {
 			isa = PBXGroup;
 			children = (
+				FA4CD2851BDE572600FC226A /* resources */,
 				FA8091791BDBC5EF008BB896 /* AppDelegate.swift */,
 				FA80917B1BDBC5EF008BB896 /* FirstViewController.swift */,
 				FA80917D1BDBC5EF008BB896 /* SecondViewController.swift */,
@@ -182,6 +201,7 @@
 				FA8091861BDBC5EF008BB896 /* LaunchScreen.storyboard in Resources */,
 				FA8091831BDBC5EF008BB896 /* Assets.xcassets in Resources */,
 				FA8091811BDBC5EF008BB896 /* Main.storyboard in Resources */,
+				FA4CD2881BDE572600FC226A /* not-available.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +411,7 @@
 				FA8091971BDBC5EF008BB896 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FA8091981BDBC5EF008BB896 /* Build configuration list for PBXNativeTarget "RememberTheDayTests" */ = {
 			isa = XCConfigurationList;
@@ -399,6 +420,7 @@
 				FA80919A1BDBC5EF008BB896 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

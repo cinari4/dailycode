@@ -12,7 +12,14 @@ class FirstViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let imageName = "not-available.jpg"
+        let image = UIImage(named: imageName);
+        let imageView = UIImageView(image: image!);
+        
+        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
+        view.addSubview(imageView)
+
     }
 
     override func didReceiveMemoryWarning() {
