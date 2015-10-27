@@ -7,24 +7,22 @@
 //
 
 import UIKit
+import Photos
 
-class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    @IBAction func testBtn(sender: AnyObject) {
-        let imagePickerViewController = UIImagePickerController()
-        imagePickerViewController.delegate = self
-        self.presentViewController(imagePickerViewController,
-            animated: true,
-            completion: nil)
-    }
 
-    let imagePicker = UIImagePickerController()
+class FirstViewController: UIViewController {
+
+    var assetCollection: PHAssetCollection!
+    var photosAsset: PHFetchResult!
+    var index: Int = 0
+    var imageView : UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let imageName = "not-available.jpg"
-        let image = UIImage(named: imageName);
-        let imageView = UIImageView(image: image!);
+        let image = UIImage(named: imageName)
+        imageView = UIImageView(image: image!)
         
         let bounds = UIScreen.mainScreen().bounds
         let screenWidth = bounds.size.width
@@ -32,15 +30,7 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         imageView.frame = CGRect(x: 0, y: 0, width: screenWidth/2, height: screenHeight/2)
         view.addSubview(imageView)
-        
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .PhotoLibrary
-        
-        presentViewController(imagePicker, animated: true, completion: nil)
-        
-        
-
+        displayPhoto()
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +38,30 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
         // Dispose of any resources that can be recreated.
     }
 
+    func displayPhoto(){
+        let fetchOptions: PHFetchOptions = PHFetchOptions()
+        
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        
+        let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
+        
+        if (fetchResult.lastObject != nil) {
+            
+            let lastAsset: PHAsset = fetchResult.lastObject as! PHAsset
+            
+            PHImageManager.defaultManager().requestImageForAsset(lastAsset, targetSize: UIScreen.mainScreen().bounds.size, contentMode: PHImageContentMode.AspectFill, options: PHImageRequestOptions()) { (result, info) -> Void in
+                
+                self.imageView.image = result;
+                
+                
+            }
+            
+            
+        }
 
+
+    }
+    
+    
 }
 
