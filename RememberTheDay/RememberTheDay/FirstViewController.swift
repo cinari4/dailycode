@@ -55,13 +55,10 @@ class FirstViewController: UIViewController {
     }
     
     func getTheDay(date:NSDate) ->String {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Year, .Month, .Day], fromDate: date )
-        
-        let year =  components.year
-        let month = components.month
-        let day = components.day
-        return String(year) + String(month) + String(day)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.stringFromDate(date)
+        return dateString
     }
     
     func displayLastPhoto() {
