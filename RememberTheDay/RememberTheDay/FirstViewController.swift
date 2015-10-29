@@ -28,9 +28,9 @@ class FirstViewController: UIViewController {
         let screenWidth = bounds.size.width
         let screenHeight = bounds.size.height
         
-        imageView.frame = CGRect(x: 0, y: 0, width: screenWidth/2, height: screenHeight/2)
+        imageView.frame = CGRect(x: screenWidth/4, y: screenHeight/8, width: screenWidth/2, height: screenHeight/3)
         view.addSubview(imageView)
-        displayPhoto()
+        displayLastPhoto()
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,30 +38,36 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func displayPhoto(){
+    func getLocalIdentifierFromPhotos(){
         let fetchOptions: PHFetchOptions = PHFetchOptions()
-        
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         
         let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
         
+        // ref : http://baccusf.tistory.com/47
+        // var assets: [PHAsset] = []
+        fetchResult.enumerateObjectsUsingBlock { (object, _, _) in
+            if let asset = object as? PHAsset {
+                print(asset.localIdentifier)
+            }
+        }
+    }
+    
+    func displayLastPhoto() {
+        let fetchOptions: PHFetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        
+        let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
+        print(fetchResult.count)
+        
         if (fetchResult.lastObject != nil) {
-            
             let lastAsset: PHAsset = fetchResult.lastObject as! PHAsset
-            
             PHImageManager.defaultManager().requestImageForAsset(lastAsset, targetSize: UIScreen.mainScreen().bounds.size, contentMode: PHImageContentMode.AspectFill, options: PHImageRequestOptions()) { (result, info) -> Void in
                 
                 self.imageView.image = result;
-                
-                
             }
-            
-            
         }
-
-
     }
-    
     
 }
 
