@@ -31,6 +31,7 @@ class FirstViewController: UIViewController {
         imageView.frame = CGRect(x: screenWidth/4, y: screenHeight/8, width: screenWidth/2, height: screenHeight/3)
         view.addSubview(imageView)
         displayLastPhoto()
+        getPhotoDate()
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,19 +39,29 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func getLocalIdentifierFromPhotos(){
+    func getPhotoDate(){
         let fetchOptions: PHFetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         
         let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
-        
-        // ref : http://baccusf.tistory.com/47
-        // var assets: [PHAsset] = []
+        let date = NSDate()
+        print(getTheDay(date))
+
         fetchResult.enumerateObjectsUsingBlock { (object, _, _) in
             if let asset = object as? PHAsset {
-                print(asset.localIdentifier)
+                print(self.getTheDay(asset.creationDate!))
             }
         }
+    }
+    
+    func getTheDay(date:NSDate) ->String {
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Year, .Month, .Day], fromDate: date )
+        
+        let year =  components.year
+        let month = components.month
+        let day = components.day
+        return String(year) + String(month) + String(day)
     }
     
     func displayLastPhoto() {
@@ -58,7 +69,6 @@ class FirstViewController: UIViewController {
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         
         let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
-        print(fetchResult.count)
         
         if (fetchResult.lastObject != nil) {
             let lastAsset: PHAsset = fetchResult.lastObject as! PHAsset

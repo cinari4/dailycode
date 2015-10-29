@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RememberTheDay/FirstViewController.swift"
-            timestampString = "467821919.385325"
+            timestampString = "467829880.827751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "displayPhoto()"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "getPhotoDate()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
