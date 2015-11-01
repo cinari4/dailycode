@@ -24,10 +24,26 @@ class FirstViewController: UIViewController {
         
         loadDefaultImage()
         getTheDayPhotoList()
+        displayThePhoto()
+    }
+    
+    func displayThePhoto() {
+        let bounds = UIScreen.mainScreen().bounds
+        let startX = bounds.size.width * 0.1
+        var startY = bounds.size.height * 0.1
+        let endX = bounds.size.width * 0.8
+        let endY = bounds.size.height * 0.4
+        
+        for i in 0..<imageList.count {
+            imageView = UIImageView(image:imageList[i])
+            imageView.frame = CGRect(x: startX, y: startY, width: endX, height: endY)
+            view.addSubview(imageView)
+            startY = startY + endY + bounds.size.height * 0.05
+        }
     }
 
     /// 과거의 오늘 사진들을 가져온다.
-    func getTheDayPhotoList(){
+    func getTheDayPhotoList() {
         let fetchOptions: PHFetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         
@@ -35,7 +51,7 @@ class FirstViewController: UIViewController {
         
         fetchResult.enumerateObjectsUsingBlock { (object, _, _) in
             if let asset = object as? PHAsset {
-                if self.getTheDay(asset.creationDate!) == self.testDay1 {
+                if self.getTheDay(asset.creationDate!) == self.testDay1 || self.getTheDay(asset.creationDate!) == self.testDay2 {
                     PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: UIScreen.mainScreen().bounds.size, contentMode: PHImageContentMode.AspectFill, options: PHImageRequestOptions()) { (result, info)  in
                         if(result != nil) {
                             self.imageList.append(result!)
