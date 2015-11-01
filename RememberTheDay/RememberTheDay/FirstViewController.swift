@@ -22,9 +22,13 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadDefaultImage()
         getTheDayPhotoList()
-        displayThePhoto()
+        if imageList.count == 0 {
+            loadDefaultImage()
+        } else {
+            displayThePhoto()
+        }
+        
     }
     
     func displayThePhoto() {
@@ -35,13 +39,28 @@ class FirstViewController: UIViewController {
         let endY = bounds.size.height * 0.4
         
         for i in 0..<imageList.count {
-            imageView = UIImageView(image:imageList[i])
+            let resizeCG = CGSizeMake(endX, endY)
+            let resizedImage = imageResize(imageList[i], sizeChange: resizeCG)
+            imageView = UIImageView(image: resizedImage)
             imageView.frame = CGRect(x: startX, y: startY, width: endX, height: endY)
             view.addSubview(imageView)
             startY = startY + endY + bounds.size.height * 0.05
         }
     }
-
+    
+    /// 이미지 리사이즈
+    func imageResize (imageObj:UIImage, sizeChange:CGSize)-> UIImage{
+        
+        let hasAlpha = false
+        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        imageObj.drawInRect(CGRect(origin: CGPointZero, size: sizeChange))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        return scaledImage
+    }
+    
     /// 과거의 오늘 사진들을 가져온다.
     func getTheDayPhotoList() {
         let fetchOptions: PHFetchOptions = PHFetchOptions()
