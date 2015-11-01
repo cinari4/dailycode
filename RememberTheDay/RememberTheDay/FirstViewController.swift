@@ -15,48 +15,37 @@ class FirstViewController: UIViewController {
     var photosAsset: PHFetchResult!
     var index: Int = 0
     var imageView : UIImageView!
-    var testDay = "10-09"
+    var testDay1 = "10-09"
+    var testDay2 = "03-12"
+    var imageList:[UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let imageName = "not-available.jpg"
-        let image = UIImage(named: imageName)
-        imageView = UIImageView(image: image!)
         
-        let bounds = UIScreen.mainScreen().bounds
-        let screenWidth = bounds.size.width
-        let screenHeight = bounds.size.height
-        
-        imageView.frame = CGRect(x: screenWidth/4, y: screenHeight/8, width: screenWidth/2, height: screenHeight/3)
-        view.addSubview(imageView)
-        displayTheDayPhoto()
+        loadDefaultImage()
+        getTheDayPhotoList()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /// 과거의 오늘 사진을 출력해준다.
-    func displayTheDayPhoto(){
+    /// 과거의 오늘 사진들을 가져온다.
+    func getTheDayPhotoList(){
         let fetchOptions: PHFetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         
         let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
-
+        
         fetchResult.enumerateObjectsUsingBlock { (object, _, _) in
             if let asset = object as? PHAsset {
-                if self.getTheDay(asset.creationDate!) == self.testDay {
-                    PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: UIScreen.mainScreen().bounds.size, contentMode: PHImageContentMode.AspectFill, options: PHImageRequestOptions()) { (result, info) -> Void in
-                        
-                        self.imageView.image = result;
+                if self.getTheDay(asset.creationDate!) == self.testDay1 {
+                    PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: UIScreen.mainScreen().bounds.size, contentMode: PHImageContentMode.AspectFill, options: PHImageRequestOptions()) { (result, info)  in
+                        if(result != nil) {
+                            self.imageList.append(result!)
+                        }
                     }
                 }
             }
         }
     }
-    
+
     /// 현재 날짜를 MM-dd 형식으로 구한다.
     func getTodayDate() -> String {
         let date = NSDate()
@@ -71,21 +60,25 @@ class FirstViewController: UIViewController {
         return dateString
     }
     
-    ///
-    func displayLastPhoto() {
-        let fetchOptions: PHFetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+    // 기본 이미지 로드
+    func loadDefaultImage() {
+        let imageName = "not-available.jpg"
+        let image = UIImage(named: imageName)
+        imageView = UIImageView(image: image!)
         
-        let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
+        let bounds = UIScreen.mainScreen().bounds
+        let screenWidth = bounds.size.width
+        let screenHeight = bounds.size.height
         
-        if (fetchResult.lastObject != nil) {
-            let lastAsset: PHAsset = fetchResult.lastObject as! PHAsset
-            PHImageManager.defaultManager().requestImageForAsset(lastAsset, targetSize: UIScreen.mainScreen().bounds.size, contentMode: PHImageContentMode.AspectFill, options: PHImageRequestOptions()) { (result, info) -> Void in
-                
-                self.imageView.image = result;
-            }
-        }
+        imageView.frame = CGRect(x: screenWidth/4, y: screenHeight/8, width: screenWidth/2, height: screenHeight/3)
+        view.addSubview(imageView)
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     
 }
 
