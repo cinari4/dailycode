@@ -15,12 +15,15 @@ class FirstViewController: UIViewController {
     var photosAsset: PHFetchResult!
     var index: Int = 0
     var imageView : UIImageView!
-    var testDay1 = "10-09"
-    var testDay2 = "03-12"
+    var testDay1 = "08-08"
+    var testDay2 = "09-16"
     var imageList:[UIImage] = []
+    let scrollView = UIScrollView(frame: UIScreen.mainScreen().bounds)
+    var scrollViewContentSize:CGFloat=0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view = self.scrollView
         
         getTheDayPhotoList()
         if imageList.count == 0 {
@@ -29,6 +32,7 @@ class FirstViewController: UIViewController {
             displayThePhoto()
         }
         
+        self.scrollView.contentSize = CGSize(width:UIScreen.mainScreen().bounds.size.width, height: scrollViewContentSize)
     }
     
     func displayThePhoto() {
@@ -38,10 +42,14 @@ class FirstViewController: UIViewController {
         let endX = bounds.size.width * 0.8
         let endY = bounds.size.height * 0.4
         
+        scrollViewContentSize += startY * CGFloat(imageList.count+1)
+        scrollViewContentSize += (endY * CGFloat(imageList.count))
+        
         for i in 0..<imageList.count {
             let resizeCG = CGSizeMake(endX, endY)
             let resizedImage = imageResize(imageList[i], sizeChange: resizeCG)
             imageView = UIImageView(image: resizedImage)
+            imageView.contentMode = UIViewContentMode.ScaleAspectFit
             imageView.frame = CGRect(x: startX, y: startY, width: endX, height: endY)
             view.addSubview(imageView)
             startY = startY + endY + bounds.size.height * 0.05
