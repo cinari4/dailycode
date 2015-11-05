@@ -8,8 +8,11 @@
 
 import UIKit
 import Photos
+import AssetsLibrary
 
-class FirstViewController: UIViewController {
+
+
+class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
 
     var assetCollection: PHAssetCollection!
     var photosAsset: PHFetchResult!
@@ -23,19 +26,30 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view = self.scrollView
+
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
+        self.view.addGestureRecognizer(gestureRecognizer)
+        self.view.addSubview(scrollView)
         
         getTheDayPhotoList()
-        if imageList.count == 0 {
+        if self.imageList.count == 0 {
             loadDefaultImage()
         } else {
-            displayThePhoto()
+            displayThePhoto(self.scrollView)
         }
         
         self.scrollView.contentSize = CGSize(width:UIScreen.mainScreen().bounds.size.width, height: scrollViewContentSize)
     }
     
-    func displayThePhoto() {
+    // get x y location on view
+    func handleTap(gestureRecognizer: UIGestureRecognizer) {
+        print("finally tapped")
+        let currentLocation : CGPoint = gestureRecognizer.locationInView(scrollView)
+        print(currentLocation)
+    }
+    
+    // display photo to input view
+    func displayThePhoto(view:UIView) {
         let bounds = UIScreen.mainScreen().bounds
         let startX = bounds.size.width * 0.1
         var startY = bounds.size.height * 0.1
@@ -79,7 +93,26 @@ class FirstViewController: UIViewController {
         fetchResult.enumerateObjectsUsingBlock { (object, _, _) in
             if let asset = object as? PHAsset {
                 if self.getTheDay(asset.creationDate!) == self.testDay1 || self.getTheDay(asset.creationDate!) == self.testDay2 {
-                    PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: UIScreen.mainScreen().bounds.size, contentMode: PHImageContentMode.AspectFill, options: PHImageRequestOptions()) { (result, info)  in
+                    //let deliveryOptions = PHImageRequestOptionsDeliveryMode.HighQualityFormat
+                    let requestOptions = PHImageRequestOptions()
+                    //requestOptions.deliveryMode = deliveryOptions
+                    
+                    PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: UIScreen.mainScreen().bounds.size, contentMode: PHImageContentMode.AspectFill, options: requestOptions) { (result, info)  in
+                        // check low-quality image
+                        /*
+                        if info!.keys.contains(NSString(string: "PHImageResultIsDegradedKey")) {
+                            if info![NSString(string: "PHImageResultIsDegradedKey")] as! Bool == false {
+                                self.imageList.append(result!)
+                            }
+                        }*/
+                        
+                        /*
+                        if info!.keys.contains(NSString(string: "PHImageFileURLKey")) {
+                            //self.getPosFromUrl(info![NSString(string: "PHImageFileURLKey")] as! NSURL)
+                            var image: UIImage = info.objectForKey(UIImagePickerControllerOriginalImage) as UIImage
+                        }
+                        */
+
                         if(result != nil) {
                             self.imageList.append(result!)
                         }
