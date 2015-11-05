@@ -21,6 +21,7 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     var testDay1 = "08-08"
     var testDay2 = "09-16"
     var imageList:[UIImage] = []
+    var imageLocationList:[CGPoint] = []
     let scrollView = UIScrollView(frame: UIScreen.mainScreen().bounds)
     var scrollViewContentSize:CGFloat=0
     
@@ -37,8 +38,6 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         } else {
             displayThePhoto(self.scrollView)
         }
-        
-        self.scrollView.contentSize = CGSize(width:UIScreen.mainScreen().bounds.size.width, height: scrollViewContentSize)
     }
     
     // get x y location on view
@@ -62,6 +61,7 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         for i in 0..<imageList.count {
             let resizeCG = CGSizeMake(endX, endY)
             let resizedImage = imageResize(imageList[i], sizeChange: resizeCG)
+            imageLocationList.append(CGPoint(x: startX, y: startY))
             imageView = UIImageView(image: resizedImage)
             imageView.contentMode = UIViewContentMode.ScaleAspectFit
             imageView.frame = CGRect(x: startX, y: startY, width: endX, height: endY)
