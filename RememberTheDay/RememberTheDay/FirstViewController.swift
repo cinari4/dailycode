@@ -20,24 +20,29 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     var imageView : UIImageView!
     var testDay1 = "08-08"
     var testDay2 = "09-16"
-    var imageList:[UIImage] = []
-    var imageLocationList:[CGPoint] = []
+    var photoInfoList:[PhotoInfo] = []
     let scrollView = UIScrollView(frame: UIScreen.mainScreen().bounds)
     var scrollViewContentSize:CGFloat=0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
-        self.view.addGestureRecognizer(gestureRecognizer)
-        self.view.addSubview(scrollView)
-        
+        // get photo list
         getTheDayPhotoList()
-        if self.imageList.count == 0 {
+        
+        // check count and set default image
+        if photoInfoList.count == 0 {
             loadDefaultImage()
         } else {
             displayThePhoto(self.scrollView)
         }
+        
+        // add gesture on view
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
+        self.view.addGestureRecognizer(gestureRecognizer)
+        scrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, scrollViewContentSize)
+        self.view.addSubview(scrollView)
+        
     }
     
     // get x y location on view
@@ -55,13 +60,13 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         let endX = bounds.size.width * 0.8
         let endY = bounds.size.height * 0.4
         
-        scrollViewContentSize += startY * CGFloat(imageList.count+1)
-        scrollViewContentSize += (endY * CGFloat(imageList.count))
+        scrollViewContentSize += startY * CGFloat(photoInfoList.count+1)
+        scrollViewContentSize += (endY * CGFloat(photoInfoList.count))
         
-        for i in 0..<imageList.count {
+        for i in 0..<photoInfoList.count {
             let resizeCG = CGSizeMake(endX, endY)
-            let resizedImage = imageResize(imageList[i], sizeChange: resizeCG)
-            imageLocationList.append(CGPoint(x: startX, y: startY))
+            let resizedImage = imageResize(photoInfoList[i].photo, sizeChange: resizeCG)
+            photoInfoList[i].pos = CGPoint(x: startX, y: startY)
             imageView = UIImageView(image: resizedImage)
             imageView.contentMode = UIViewContentMode.ScaleAspectFit
             imageView.frame = CGRect(x: startX, y: startY, width: endX, height: endY)
@@ -72,7 +77,6 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     
     /// 이미지 리사이즈
     func imageResize (imageObj:UIImage, sizeChange:CGSize)-> UIImage{
-        
         let hasAlpha = false
         let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
         
@@ -93,28 +97,12 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         fetchResult.enumerateObjectsUsingBlock { (object, _, _) in
             if let asset = object as? PHAsset {
                 if self.getTheDay(asset.creationDate!) == self.testDay1 || self.getTheDay(asset.creationDate!) == self.testDay2 {
-                    //let deliveryOptions = PHImageRequestOptionsDeliveryMode.HighQualityFormat
                     let requestOptions = PHImageRequestOptions()
-                    //requestOptions.deliveryMode = deliveryOptions
-                    
                     PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: UIScreen.mainScreen().bounds.size, contentMode: PHImageContentMode.AspectFill, options: requestOptions) { (result, info)  in
-                        // check low-quality image
-                        /*
-                        if info!.keys.contains(NSString(string: "PHImageResultIsDegradedKey")) {
-                            if info![NSString(string: "PHImageResultIsDegradedKey")] as! Bool == false {
-                                self.imageList.append(result!)
-                            }
-                        }*/
-                        
-                        /*
-                        if info!.keys.contains(NSString(string: "PHImageFileURLKey")) {
-                            //self.getPosFromUrl(info![NSString(string: "PHImageFileURLKey")] as! NSURL)
-                            var image: UIImage = info.objectForKey(UIImagePickerControllerOriginalImage) as UIImage
-                        }
-                        */
 
                         if(result != nil) {
-                            self.imageList.append(result!)
+                            let photo = PhotoInfo(photo: result!)
+                            self.photoInfoList.append(photo!)
                         }
                     }
                 }

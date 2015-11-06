@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA3CA7161BED2DB400E8C529 /* PhotoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CA7151BED2DB400E8C529 /* PhotoInfo.swift */; settings = {ASSET_TAGS = (); }; };
 		FA4CD2881BDE572600FC226A /* not-available.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA4CD2871BDE572600FC226A /* not-available.jpg */; settings = {ASSET_TAGS = (); }; };
 		FA80917A1BDBC5EF008BB896 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8091791BDBC5EF008BB896 /* AppDelegate.swift */; };
 		FA80917C1BDBC5EF008BB896 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA80917B1BDBC5EF008BB896 /* FirstViewController.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA3CA7151BED2DB400E8C529 /* PhotoInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoInfo.swift; sourceTree = "<group>"; };
 		FA4CD2871BDE572600FC226A /* not-available.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "not-available.jpg"; sourceTree = "<group>"; };
 		FA8091761BDBC5EF008BB896 /* RememberTheDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememberTheDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8091791BDBC5EF008BB896 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				FA8091821BDBC5EF008BB896 /* Assets.xcassets */,
 				FA8091841BDBC5EF008BB896 /* LaunchScreen.storyboard */,
 				FA8091871BDBC5EF008BB896 /* Info.plist */,
+				FA3CA7151BED2DB400E8C529 /* PhotoInfo.swift */,
 			);
 			path = RememberTheDay;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				FA80917E1BDBC5EF008BB896 /* SecondViewController.swift in Sources */,
 				FA80917A1BDBC5EF008BB896 /* AppDelegate.swift in Sources */,
 				FA80917C1BDBC5EF008BB896 /* FirstViewController.swift in Sources */,
+				FA3CA7161BED2DB400E8C529 /* PhotoInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
