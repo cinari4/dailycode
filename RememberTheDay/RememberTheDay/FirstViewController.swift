@@ -28,7 +28,9 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         getTheDayPhotoList()
         
         // check count and set default image
-        if photoInfoList.count == 0 {
+        print("\(self.photoInfoList.count)")
+        
+        if self.photoInfoList.count == 0 {
             loadDefaultImage()
         } else {
             displayThePhoto(self.scrollView)
@@ -36,6 +38,7 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // add gesture on view
         addTapGesture()
+        
     }
     
     // add tap Gesture
@@ -63,7 +66,7 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         
         scrollViewContentSize += startY * CGFloat(photoInfoList.count+1)
         scrollViewContentSize += (endY * CGFloat(photoInfoList.count))
-        
+
         for i in 0..<photoInfoList.count {
             let resizeCG = CGSizeMake(endX, endY)
             let resizedImage = imageResize(photoInfoList[i].photo, sizeChange: resizeCG)
@@ -99,11 +102,13 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
             if let asset = object as? PHAsset {
                 if self.getTheDay(asset.creationDate!) == self.testDay1 || self.getTheDay(asset.creationDate!) == self.testDay2 {
                     let requestOptions = PHImageRequestOptions()
+                    requestOptions.synchronous = true
                     PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: UIScreen.mainScreen().bounds.size, contentMode: PHImageContentMode.AspectFill, options: requestOptions) { (result, info)  in
 
-                        if let imageURL = info!["PHImageFileURLKey"] as! NSURL? {
-                            let photo = PhotoInfo(fileUrl: imageURL)
-                            self.photoInfoList.append(photo)
+                        if let photoURL = info!["PHImageFileURLKey"] as! NSURL? {
+                            let photo = NSData(contentsOfURL: photoURL)
+                            let photoInfoObj = PhotoInfo(photoURL: photoURL, photo:UIImage(data:photo!)!)
+                            self.photoInfoList.append(photoInfoObj)
                         }
                     }
                 }

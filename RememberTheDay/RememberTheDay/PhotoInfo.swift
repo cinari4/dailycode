@@ -11,19 +11,11 @@ import UIKit
 class PhotoInfo {
     var photo :UIImage
     var pos:CGPoint
-    var fileUrl:NSURL
+    var photoURL:NSURL
 
-    init(fileUrl:NSURL, photo:UIImage, pos:CGPoint) {
-        self.fileUrl = fileUrl
+    init(photoURL:NSURL, photo:UIImage) {
+        self.photoURL = photoURL
         self.photo = photo
-        self.pos = pos
-    }
-    
-    init(fileUrl:NSURL) {
-        self.fileUrl = fileUrl
-        self.photo = UIImage(named: "not-available.jpg")!;
         self.pos = CGPoint(x: 0, y: 0)
     }
-    
-    
 }
