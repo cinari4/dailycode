@@ -14,9 +14,6 @@ import AssetsLibrary
 
 class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
 
-    var assetCollection: PHAssetCollection!
-    var photosAsset: PHFetchResult!
-    var index: Int = 0
     var imageView : UIImageView!
     var testDay1 = "08-08"
     var testDay2 = "09-16"
@@ -38,14 +35,18 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         // add gesture on view
+        addTapGesture()
+    }
+    
+    // add tap Gesture
+    func addTapGesture() {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
         self.view.addGestureRecognizer(gestureRecognizer)
         scrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, scrollViewContentSize)
         self.view.addSubview(scrollView)
-        
     }
     
-    // get x y location on view
+    // view tap gesture handler
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
         print("finally tapped")
         let currentLocation : CGPoint = gestureRecognizer.locationInView(scrollView)
@@ -87,7 +88,7 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         return scaledImage
     }
     
-    /// 과거의 오늘 사진들을 가져온다.
+    /// 과거의 오늘 사진의 url을 가져온다.
     func getTheDayPhotoList() {
         let fetchOptions: PHFetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
@@ -100,9 +101,9 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
                     let requestOptions = PHImageRequestOptions()
                     PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: UIScreen.mainScreen().bounds.size, contentMode: PHImageContentMode.AspectFill, options: requestOptions) { (result, info)  in
 
-                        if(result != nil) {
-                            let photo = PhotoInfo(photo: result!)
-                            self.photoInfoList.append(photo!)
+                        if let imageURL = info!["PHImageFileURLKey"] as! NSURL? {
+                            let photo = PhotoInfo(fileUrl: imageURL)
+                            self.photoInfoList.append(photo)
                         }
                     }
                 }
