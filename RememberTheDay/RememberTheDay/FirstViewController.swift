@@ -20,20 +20,25 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     var photoInfoList:[PhotoInfo] = []
     let scrollView = UIScrollView(frame: UIScreen.mainScreen().bounds)
     var scrollViewContentSize:CGFloat=0
+    var screenBounds : CGRect!
+    var startX : CGFloat!
+    var endX : CGFloat!
+    var endY : CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setDisplayPoints()
 
+        
         // get photo list
         getTheDayPhotoList()
         
         // check count and set default image
-        print("\(self.photoInfoList.count)")
-        
-        if self.photoInfoList.count == 0 {
+        if photoInfoList.count == 0 {
             loadDefaultImage()
         } else {
-            displayThePhoto(self.scrollView)
+            displayThePhoto(scrollView)
         }
         
         // add gesture on view
@@ -49,20 +54,36 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.addSubview(scrollView)
     }
     
+    // check what photo u tapped
+    func getTappedPicture(point:CGPoint) ->Int {
+        for i in 0..<photoInfoList.count {
+            if CGRectContainsPoint(photoInfoList[i].pos, point) {
+                return i
+            }
+        }
+        return -1
+    }
+    
     // view tap gesture handler
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
         print("finally tapped")
         let currentLocation : CGPoint = gestureRecognizer.locationInView(scrollView)
-        print(currentLocation)
+        let reuslt = getTappedPicture(currentLocation)
+        print("\(reuslt)")
     }
+    
+    // set display points
+    func setDisplayPoints() {
+        screenBounds = UIScreen.mainScreen().bounds
+        startX = screenBounds.size.width * 0.1
+        endX = screenBounds.size.width * 0.8
+        endY = screenBounds.size.height * 0.4
+    }
+    
     
     // display photo to input view
     func displayThePhoto(view:UIView) {
-        let bounds = UIScreen.mainScreen().bounds
-        let startX = bounds.size.width * 0.1
-        var startY = bounds.size.height * 0.1
-        let endX = bounds.size.width * 0.8
-        let endY = bounds.size.height * 0.4
+        var startY = screenBounds.size.height * 0.1
         
         scrollViewContentSize += startY * CGFloat(photoInfoList.count+1)
         scrollViewContentSize += (endY * CGFloat(photoInfoList.count))
@@ -70,14 +91,16 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         for i in 0..<photoInfoList.count {
             let resizeCG = CGSizeMake(endX, endY)
             let resizedImage = imageResize(photoInfoList[i].photo, sizeChange: resizeCG)
-            photoInfoList[i].pos = CGPoint(x: startX, y: startY)
+            photoInfoList[i].pos = CGRect(x: startX, y: startY, width: endX, height: endY)
+
             imageView = UIImageView(image: resizedImage)
             imageView.contentMode = UIViewContentMode.ScaleAspectFit
-            imageView.frame = CGRect(x: startX, y: startY, width: endX, height: endY)
+            imageView.frame = photoInfoList[i].pos
             view.addSubview(imageView)
-            startY = startY + endY + bounds.size.height * 0.05
+            startY = startY + endY + screenBounds.size.height * 0.05
         }
     }
+    
     
     /// 이미지 리사이즈
     func imageResize (imageObj:UIImage, sizeChange:CGSize)-> UIImage{
@@ -91,7 +114,7 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         return scaledImage
     }
     
-    /// 과거의 오늘 사진의 url을 가져온다.
+    /// 과거의 오늘 사진의 url, image를 가져온다.
     func getTheDayPhotoList() {
         let fetchOptions: PHFetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
@@ -103,8 +126,7 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
                 if self.getTheDay(asset.creationDate!) == self.testDay1 || self.getTheDay(asset.creationDate!) == self.testDay2 {
                     let requestOptions = PHImageRequestOptions()
                     requestOptions.synchronous = true
-                    PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: UIScreen.mainScreen().bounds.size, contentMode: PHImageContentMode.AspectFill, options: requestOptions) { (result, info)  in
-
+                    PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.screenBounds.size, contentMode: PHImageContentMode.AspectFill, options: requestOptions) { (result, info)  in
                         if let photoURL = info!["PHImageFileURLKey"] as! NSURL? {
                             let photo = NSData(contentsOfURL: photoURL)
                             let photoInfoObj = PhotoInfo(photoURL: photoURL, photo:UIImage(data:photo!)!)
@@ -136,9 +158,8 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         let image = UIImage(named: imageName)
         imageView = UIImageView(image: image!)
         
-        let bounds = UIScreen.mainScreen().bounds
-        let screenWidth = bounds.size.width
-        let screenHeight = bounds.size.height
+        let screenWidth = screenBounds.size.width
+        let screenHeight = screenBounds.size.height
         
         imageView.frame = CGRect(x: screenWidth/4, y: screenHeight/8, width: screenWidth/2, height: screenHeight/3)
         view.addSubview(imageView)

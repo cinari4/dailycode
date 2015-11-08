@@ -10,12 +10,12 @@ import UIKit
 
 class PhotoInfo {
     var photo :UIImage
-    var pos:CGPoint
+    var pos:CGRect
     var photoURL:NSURL
 
     init(photoURL:NSURL, photo:UIImage) {
         self.photoURL = photoURL
         self.photo = photo
-        self.pos = CGPoint(x: 0, y: 0)
+        self.pos = CGRect(x: 0, y: 0, width:0, height:0)
     }
 }
