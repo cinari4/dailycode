@@ -9,18 +9,17 @@
 import UIKit
 
 class ImageViewController: UIViewController {
+
+    var uiImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        print("tttt")
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidAppear(animated: Bool) {
+        let imageView = UIImageView(frame: UIScreen.mainScreen().bounds)
+        imageView.image = self.uiImage
+        self.view.addSubview(imageView)
     }
-    
-    
 }
 

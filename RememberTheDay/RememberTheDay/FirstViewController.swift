@@ -63,15 +63,15 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // view tap gesture handler
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
-        print("finally tapped")
         let currentLocation : CGPoint = gestureRecognizer.locationInView(scrollView)
-        let reuslt = getTappedPicture(currentLocation)
-        print("you tapped \(reuslt) photo")
+        let clickedPhoto = getTappedPicture(currentLocation)
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let imageViewController = storyboard.instantiateViewControllerWithIdentifier("imageViewControllerIdentifier") as! ImageViewController
-        self.presentViewController(imageViewController, animated: true, completion: nil)
-        print("t")
+        if clickedPhoto >= 0 {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let imageViewController = storyboard.instantiateViewControllerWithIdentifier("imageViewControllerIdentifier") as! ImageViewController
+            imageViewController.uiImage = photoInfoList[clickedPhoto].photo
+            self.presentViewController(imageViewController, animated: true, completion: nil)
+        }
     }
     
     // set display points
@@ -166,12 +166,6 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         imageView.frame = CGRect(x: screenWidth/4, y: screenHeight/8, width: screenWidth/2, height: screenHeight/3)
         view.addSubview(imageView)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
+   
 }
 
