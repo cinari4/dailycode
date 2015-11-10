@@ -50,10 +50,10 @@
             </objects>
             <point key="canvasLocation" x="750" y="-320"/>
         </scene>
-        <!--Image Show View Controller-->
+        <!--Image View Controller-->
         <scene sceneID="BFo-fc-vlH">
             <objects>
-                <viewController id="rMP-Tp-Jwy" customClass="ImageShowViewController" customModule="RememberTheDay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="imageViewControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rMP-Tp-Jwy" customClass="ImageViewController" customModule="RememberTheDay" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SbE-bh-0MT"/>
                         <viewControllerLayoutGuide type="bottom" id="VwB-Tu-8AP"/>
@@ -61,6 +61,17 @@
                     <view key="view" contentMode="scaleToFill" id="mG6-8L-JU4">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgd-KT-fZW">
+                                <rect key="frame" x="534" y="22" width="30" height="30"/>
+                                <animations/>
+                                <state key="normal" title="X"/>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="imageViewControllerIdentifier" translatesAutoresizingMaskIntoConstraints="NO" id="oQv-u9-ewO">
+                                <rect key="frame" x="0.0" y="22" width="510" height="479"/>
+                                <animations/>
+                            </imageView>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA31DF921BF0ED4A002B3F4C /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA31DF911BF0ED4A002B3F4C /* ImageViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		FA3CA7161BED2DB400E8C529 /* PhotoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CA7151BED2DB400E8C529 /* PhotoInfo.swift */; settings = {ASSET_TAGS = (); }; };
 		FA4CD2881BDE572600FC226A /* not-available.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA4CD2871BDE572600FC226A /* not-available.jpg */; settings = {ASSET_TAGS = (); }; };
-		FA7E3BAD1BEF79830069CCA4 /* ImageShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E3BAC1BEF79830069CCA4 /* ImageShowViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		FA80917A1BDBC5EF008BB896 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8091791BDBC5EF008BB896 /* AppDelegate.swift */; };
 		FA80917C1BDBC5EF008BB896 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA80917B1BDBC5EF008BB896 /* FirstViewController.swift */; };
 		FA80917E1BDBC5EF008BB896 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA80917D1BDBC5EF008BB896 /* SecondViewController.swift */; };
@@ -30,9 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA31DF911BF0ED4A002B3F4C /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewController.swift; path = ../ImageViewController.swift; sourceTree = "<group>"; };
 		FA3CA7151BED2DB400E8C529 /* PhotoInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoInfo.swift; sourceTree = "<group>"; };
 		FA4CD2871BDE572600FC226A /* not-available.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "not-available.jpg"; sourceTree = "<group>"; };
-		FA7E3BAC1BEF79830069CCA4 /* ImageShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageShowViewController.swift; sourceTree = "<group>"; };
 		FA8091761BDBC5EF008BB896 /* RememberTheDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememberTheDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8091791BDBC5EF008BB896 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA80917B1BDBC5EF008BB896 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 				FA8091791BDBC5EF008BB896 /* AppDelegate.swift */,
 				FA80917B1BDBC5EF008BB896 /* FirstViewController.swift */,
 				FA80917D1BDBC5EF008BB896 /* SecondViewController.swift */,
-				FA7E3BAC1BEF79830069CCA4 /* ImageShowViewController.swift */,
+				FA31DF911BF0ED4A002B3F4C /* ImageViewController.swift */,
 				FA80917F1BDBC5EF008BB896 /* Main.storyboard */,
 				FA8091821BDBC5EF008BB896 /* Assets.xcassets */,
 				FA8091841BDBC5EF008BB896 /* LaunchScreen.storyboard */,
@@ -226,8 +226,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA80917E1BDBC5EF008BB896 /* SecondViewController.swift in Sources */,
-				FA7E3BAD1BEF79830069CCA4 /* ImageShowViewController.swift in Sources */,
 				FA80917A1BDBC5EF008BB896 /* AppDelegate.swift in Sources */,
+				FA31DF921BF0ED4A002B3F4C /* ImageViewController.swift in Sources */,
 				FA80917C1BDBC5EF008BB896 /* FirstViewController.swift in Sources */,
 				FA3CA7161BED2DB400E8C529 /* PhotoInfo.swift in Sources */,
 			);

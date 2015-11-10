@@ -8,9 +8,6 @@
 
 import UIKit
 import Photos
-import AssetsLibrary
-
-
 
 class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
 
@@ -69,7 +66,12 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         print("finally tapped")
         let currentLocation : CGPoint = gestureRecognizer.locationInView(scrollView)
         let reuslt = getTappedPicture(currentLocation)
-        print("\(reuslt)")
+        print("you tapped \(reuslt) photo")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let imageViewController = storyboard.instantiateViewControllerWithIdentifier("imageViewControllerIdentifier") as! ImageViewController
+        self.presentViewController(imageViewController, animated: true, completion: nil)
+        print("t")
     }
     
     // set display points
