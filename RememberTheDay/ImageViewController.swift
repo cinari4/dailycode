@@ -11,15 +11,24 @@ import UIKit
 class ImageViewController: UIViewController {
 
     var uiImage: UIImage!
+    let imageView = UIImageView(frame: UIScreen.mainScreen().bounds)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tap = UITapGestureRecognizer(target: self, action: Selector("tappedMe"))
+        imageView.addGestureRecognizer(tap)
+        imageView.userInteractionEnabled = true
     }
     
     override func viewDidAppear(animated: Bool) {
-        let imageView = UIImageView(frame: UIScreen.mainScreen().bounds)
         imageView.image = self.uiImage
         self.view.addSubview(imageView)
+    }
+    
+    func tappedMe()
+    {
+         self.dismissViewControllerAnimated(true, completion: {});
     }
 }
 
