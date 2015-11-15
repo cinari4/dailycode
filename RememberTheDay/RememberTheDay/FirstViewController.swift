@@ -131,7 +131,13 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
                     PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.screenBounds.size, contentMode: PHImageContentMode.AspectFill, options: requestOptions) { (result, info)  in
                         if let photoURL = info!["PHImageFileURLKey"] as! NSURL? {
                             let photo = NSData(contentsOfURL: photoURL)
-                            let photoInfoObj = PhotoInfo(photoURL: photoURL, photo:UIImage(data:photo!)!)
+                            var location:CLLocation!
+                            if asset.location == nil {
+                                location = CLLocation(latitude: 0, longitude: 0)
+                            } else {
+                                location = asset.location
+                            }
+                            let photoInfoObj = PhotoInfo(photoURL: photoURL, photo:UIImage(data:photo!)!, location:location)
                             self.photoInfoList.append(photoInfoObj)
                         }
                     }
