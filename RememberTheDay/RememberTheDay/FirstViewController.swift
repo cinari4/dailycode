@@ -82,7 +82,6 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         endY = screenBounds.size.height * 0.4
     }
     
-    
     // display photo to input view
     func displayThePhoto(view:UIView) {
         var startY = screenBounds.size.height * 0.1
@@ -93,16 +92,29 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         for i in 0..<photoInfoList.count {
             let resizeCG = CGSizeMake(endX, endY)
             let resizedImage = imageResize(photoInfoList[i].photo, sizeChange: resizeCG)
-            photoInfoList[i].pos = CGRect(x: startX, y: startY, width: endX, height: endY)
+            let imageRect = CGRect(x: startX, y: startY, width: endX, height: endY)
+            photoInfoList[i].pos = imageRect
 
             imageView = UIImageView(image: resizedImage)
             imageView.contentMode = UIViewContentMode.ScaleAspectFit
             imageView.frame = photoInfoList[i].pos
+            setLabel(imageRect, view:view, location: photoInfoList[i].location)
             view.addSubview(imageView)
             startY = startY + endY + screenBounds.size.height * 0.05
         }
     }
     
+    func setLabel(rect:CGRect, view:UIView, location:CLLocation) {
+        let labelRect = CGRect(x:rect.minX, y:rect.maxY + 10, width:rect.width, height:20 )
+        let label = UILabel(frame: labelRect)
+        label.textAlignment = NSTextAlignment.Center
+        label.text = location.description
+        view.addSubview(label)
+    }
+    
+    func printRect(rect:CGRect) {
+        print("\(rect.minX) \(rect.minY) \(rect.maxX) \(rect.maxY)")
+    }
     
     /// 이미지 리사이즈
     func imageResize (imageObj:UIImage, sizeChange:CGSize)-> UIImage{

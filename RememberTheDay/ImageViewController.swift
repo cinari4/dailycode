@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ImageViewController: UIViewController {
 
     var uiImage: UIImage!
     let imageView = UIImageView(frame: UIScreen.mainScreen().bounds)
+    var location:CLLocation!
     
     override func viewDidLoad() {
         super.viewDidLoad()
