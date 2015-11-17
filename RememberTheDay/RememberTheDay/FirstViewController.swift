@@ -184,6 +184,21 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         imageView.frame = CGRect(x: screenWidth/4, y: screenHeight/8, width: screenWidth/2, height: screenHeight/3)
         view.addSubview(imageView)
     }
-   
+
+    override func shouldAutorotate() -> Bool {
+        // Lock autorotate
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        // Only allow Portrait
+        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.Portrait, UIInterfaceOrientationMask.PortraitUpsideDown]
+        return orientation
+    }
+
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        // Only allow Portrait
+        return UIInterfaceOrientation.Portrait
+    }
 }
 
