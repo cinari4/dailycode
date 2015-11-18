@@ -19,8 +19,11 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     var scrollViewContentSize:CGFloat=0
     var screenBounds : CGRect!
     var startX : CGFloat!
-    var endX : CGFloat!
-    var endY : CGFloat!
+    var startY : CGFloat!
+    var photoWidth : CGFloat!
+    var photoHeight : CGFloat!
+    var labelWidth : CGFloat!
+    var labelHeight : CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,21 +81,22 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     func setDisplayPoints() {
         screenBounds = UIScreen.mainScreen().bounds
         startX = screenBounds.size.width * 0.1
-        endX = screenBounds.size.width * 0.8
-        endY = screenBounds.size.height * 0.4
+        startY = screenBounds.size.height * 0.1
+        photoWidth = screenBounds.size.width * 0.8
+        photoHeight = screenBounds.size.height * 0.4
+        labelWidth = screenBounds.size.width * 0.8
+        labelHeight = screenBounds.size.height * 0.05
     }
     
     // display photo to input view
     func displayThePhoto(view:UIView) {
-        var startY = screenBounds.size.height * 0.1
-        
         scrollViewContentSize += startY * CGFloat(photoInfoList.count+1)
-        scrollViewContentSize += (endY * CGFloat(photoInfoList.count))
+        scrollViewContentSize += (photoHeight * CGFloat(photoInfoList.count))
 
         for i in 0..<photoInfoList.count {
-            let resizeCG = CGSizeMake(endX, endY)
+            let resizeCG = CGSizeMake(photoWidth, photoHeight)
             let resizedImage = imageResize(photoInfoList[i].photo, sizeChange: resizeCG)
-            let imageRect = CGRect(x: startX, y: startY, width: endX, height: endY)
+            let imageRect = CGRect(x: startX, y: startY, width: photoWidth, height: photoHeight)
             photoInfoList[i].pos = imageRect
 
             imageView = UIImageView(image: resizedImage)
@@ -100,12 +104,12 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
             imageView.frame = photoInfoList[i].pos
             setLabel(imageRect, view:view, location: photoInfoList[i].location)
             view.addSubview(imageView)
-            startY = startY + endY + screenBounds.size.height * 0.05
+            startY = startY + photoWidth + screenBounds.size.height * 0.05
         }
     }
     
     func setLabel(rect:CGRect, view:UIView, location:CLLocation) {
-        let labelRect = CGRect(x:rect.minX, y:rect.maxY + 10, width:rect.width, height:20 )
+        let labelRect = CGRect(x:rect.minX, y:rect.maxY + 10, width:labelWidth, height:labelHeight )
         let label = UILabel(frame: labelRect)
         label.textAlignment = NSTextAlignment.Center
         label.text = location.description
