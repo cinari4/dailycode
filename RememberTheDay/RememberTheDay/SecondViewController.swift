@@ -7,19 +7,43 @@
 //
 
 import UIKit
+import Foundation
 
 class SecondViewController: UIViewController {
 
+    enum JSONError: String, ErrorType {
+        case NoData = "ERROR: no data"
+        case ConversionFailed = "ERROR: conversion from JSON failed"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        jsonParser()
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+        
+    func jsonParser() {
+        let urlPath = "http://headers.jsontest.com/"
+        guard let endpoint = NSURL(string: urlPath) else { print("Error creating endpoint");return }
+        let request = NSMutableURLRequest(URL:endpoint)
+        NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) -> Void in
+            do {
+                guard let dat = data else { throw JSONError.NoData }
+                guard let json = try NSJSONSerialization.JSONObjectWithData(dat, options: []) as? NSDictionary else { throw JSONError.ConversionFailed }
+                print(json)
+            } catch let error as JSONError {
+                print(error.rawValue)
+            } catch {
+                print(error)
+            }
+            }.resume()
+    }
+    
 }
 
