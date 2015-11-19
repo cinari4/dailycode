@@ -29,7 +29,7 @@ class SecondViewController: UIViewController {
     }
         
     func jsonParser() {
-        let urlPath = "http://headers.jsontest.com/"
+        let urlPath = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=ko&latlng=+65.68289500,-17.54892833"
         guard let endpoint = NSURL(string: urlPath) else { print("Error creating endpoint");return }
         let request = NSMutableURLRequest(URL:endpoint)
         NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) -> Void in
