@@ -102,17 +102,17 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
             imageView = UIImageView(image: resizedImage)
             imageView.contentMode = UIViewContentMode.ScaleAspectFit
             imageView.frame = photoInfoList[i].pos
-            setLabel(imageRect, view:view, location: photoInfoList[i].location)
+            setLabel(imageRect, view:view, creationDate: photoInfoList[i].creationDate)
             view.addSubview(imageView)
             startY = startY + photoWidth + screenBounds.size.height * 0.05
         }
     }
     
-    func setLabel(rect:CGRect, view:UIView, location:CLLocation) {
+    func setLabel(rect:CGRect, view:UIView, creationDate:NSDate) {
         let labelRect = CGRect(x:rect.minX, y:rect.maxY + 10, width:labelWidth, height:labelHeight )
         let label = UILabel(frame: labelRect)
         label.textAlignment = NSTextAlignment.Center
-        label.text = location.description
+        label.text = getPhotoDay(creationDate)
         view.addSubview(label)
     }
     
@@ -153,7 +153,7 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
                             } else {
                                 location = asset.location
                             }
-                            let photoInfoObj = PhotoInfo(photoURL: photoURL, photo:UIImage(data:photo!)!, location:location)
+                            let photoInfoObj = PhotoInfo(photoURL: photoURL, photo:UIImage(data:photo!)!, location:location, creationDate:asset.creationDate!)
                             self.photoInfoList.append(photoInfoObj)
                         }
                     }
@@ -172,6 +172,14 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     func getTheDay(date:NSDate) ->String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MM-dd"
+        let dateString = dateFormatter.stringFromDate(date)
+        return dateString
+    }
+    
+    /// 입력된 날짜를 MM-dd형식으로 변환해줍니다.
+    func getPhotoDay(date:NSDate) ->String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.stringFromDate(date)
         return dateString
     }

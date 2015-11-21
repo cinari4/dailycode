@@ -14,11 +14,13 @@ class PhotoInfo {
     var pos:CGRect
     var photoURL:NSURL
     var location:CLLocation
+    var creationDate:NSDate
 
-    init(photoURL:NSURL, photo:UIImage, location:CLLocation) {
+    init(photoURL:NSURL, photo:UIImage, location:CLLocation, creationDate:NSDate) {
         self.photoURL = photoURL
         self.photo = photo
         self.pos = CGRect(x: 0, y: 0, width:0, height:0)
         self.location = location
+        self.creationDate = creationDate
     }
 }
