@@ -9,15 +9,17 @@
 import UIKit
 import Photos
 
+var photoInfoList:[PhotoInfo] = []
+var screenBounds = UIScreen.mainScreen().bounds
+
 class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
 
     var imageView : UIImageView!
     var testDay1 = "08-08"
     var testDay2 = "09-16"
-    var photoInfoList:[PhotoInfo] = []
     let scrollView = UIScrollView(frame: UIScreen.mainScreen().bounds)
     var scrollViewContentSize:CGFloat=0
-    var screenBounds : CGRect!
+    
     var startX : CGFloat!
     var startY : CGFloat!
     var photoWidth : CGFloat!
@@ -29,7 +31,6 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         
         setDisplayPoints()
-
         
         // get photo list
         getTheDayPhotoList()
@@ -79,7 +80,6 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // set display points
     func setDisplayPoints() {
-        screenBounds = UIScreen.mainScreen().bounds
         startX = screenBounds.size.width * 0.1
         startY = screenBounds.size.height * 0.1
         photoWidth = screenBounds.size.width * 0.8
@@ -116,10 +116,6 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         view.addSubview(label)
     }
     
-    func printRect(rect:CGRect) {
-        print("\(rect.minX) \(rect.minY) \(rect.maxX) \(rect.maxY)")
-    }
-    
     /// 이미지 리사이즈
     func imageResize (imageObj:UIImage, sizeChange:CGSize)-> UIImage{
         let hasAlpha = false
@@ -141,10 +137,10 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         
         fetchResult.enumerateObjectsUsingBlock { (object, _, _) in
             if let asset = object as? PHAsset {
-                if self.getTheDay(asset.creationDate!) == self.testDay1 || self.getTheDay(asset.creationDate!) == self.testDay2 {
+                if getTheDay(asset.creationDate!) == self.testDay1 || getTheDay(asset.creationDate!) == self.testDay2 {
                     let requestOptions = PHImageRequestOptions()
                     requestOptions.synchronous = true
-                    PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.screenBounds.size, contentMode: PHImageContentMode.AspectFill, options: requestOptions) { (result, info)  in
+                    PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: screenBounds.size, contentMode: PHImageContentMode.AspectFill, options: requestOptions) { (result, info)  in
                         if let photoURL = info!["PHImageFileURLKey"] as! NSURL? {
                             let photo = NSData(contentsOfURL: photoURL)
                             var location:CLLocation!
@@ -154,7 +150,7 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
                                 location = asset.location
                             }
                             let photoInfoObj = PhotoInfo(photoURL: photoURL, photo:UIImage(data:photo!)!, location:location, creationDate:asset.creationDate!)
-                            self.photoInfoList.append(photoInfoObj)
+                            photoInfoList.append(photoInfoObj)
                         }
                     }
                 }
@@ -162,27 +158,6 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
-    /// 현재 날짜를 MM-dd 형식으로 구한다.
-    func getTodayDate() -> String {
-        let date = NSDate()
-        return getTheDay(date)
-    }
-    
-    /// 입력된 날짜를 MM-dd형식으로 변환해줍니다.
-    func getTheDay(date:NSDate) ->String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MM-dd"
-        let dateString = dateFormatter.stringFromDate(date)
-        return dateString
-    }
-    
-    /// 입력된 날짜를 MM-dd형식으로 변환해줍니다.
-    func getPhotoDay(date:NSDate) ->String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dateFormatter.stringFromDate(date)
-        return dateString
-    }
     
     // 기본 이미지 로드
     func loadDefaultImage() {
