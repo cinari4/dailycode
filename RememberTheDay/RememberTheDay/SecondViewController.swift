@@ -12,32 +12,24 @@ import GoogleMaps;
 
 class SecondViewController: UIViewController {
     
-    var photoInfoList:[PhotoInfo] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let firstViewController = storyboard!.instantiateViewControllerWithIdentifier("firstViewController") as! FirstViewController
-        photoInfoList = firstViewController.photoInfoList
-
-        let camera = GMSCameraPosition.cameraWithLatitude(-33.868,
-            longitude:151.2086, zoom:2)
-        let mapView = GMSMapView.mapWithFrame(CGRectZero, camera:camera)
         
-        let marker = GMSMarker()
-        marker.position = camera.target
-        marker.snippet = "Hello World"
-        marker.appearAnimation = kGMSMarkerAnimationPop
-        marker.map = mapView
-        
-        
-        let marker2 = GMSMarker()
-        marker2.position = CLLocationCoordinate2DMake(+65.68289500, -17.54892833)
-        marker2.snippet = "Hello World"
-        marker2.appearAnimation = kGMSMarkerAnimationPop
-        marker2.map = mapView
-        
-        self.view = mapView
+        if(photoInfoList.count > 0) {
+            let camera = GMSCameraPosition.cameraWithLatitude(photoInfoList[0].location.coordinate.latitude,
+                longitude:photoInfoList[0].location.coordinate.longitude, zoom:2)
+            let mapView = GMSMapView.mapWithFrame(CGRectZero, camera:camera)
+            
+            for i in 0..<photoInfoList.count {
+                let marker = GMSMarker()
+                marker.position = CLLocationCoordinate2DMake(photoInfoList[i].location.coordinate.latitude, photoInfoList[i].location.coordinate.longitude)
+                marker.snippet = "Hello World"
+                marker.appearAnimation = kGMSMarkerAnimationPop
+                marker.map = mapView
+            }
+            self.view = mapView
+        }
 
     }
 
