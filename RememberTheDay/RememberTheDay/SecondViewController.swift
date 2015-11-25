@@ -11,10 +11,9 @@ import Foundation
 import GoogleMaps;
 
 class SecondViewController: UIViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         if(photoInfoList.count > 0) {
             let camera = GMSCameraPosition.cameraWithLatitude(photoInfoList[0].location.coordinate.latitude,
@@ -24,7 +23,7 @@ class SecondViewController: UIViewController {
             for i in 0..<photoInfoList.count {
                 let marker = GMSMarker()
                 marker.position = CLLocationCoordinate2DMake(photoInfoList[i].location.coordinate.latitude, photoInfoList[i].location.coordinate.longitude)
-                marker.snippet = "Hello World"
+                marker.snippet = photoInfoList[i].address
                 marker.appearAnimation = kGMSMarkerAnimationPop
                 marker.map = mapView
             }

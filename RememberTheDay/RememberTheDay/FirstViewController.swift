@@ -11,6 +11,8 @@ import Photos
 
 var photoInfoList:[PhotoInfo] = []
 var screenBounds = UIScreen.mainScreen().bounds
+let NO_PLACE_NAME = "The location could not be found."
+
 
 class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
 
@@ -26,6 +28,11 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     var photoHeight : CGFloat!
     var labelWidth : CGFloat!
     var labelHeight : CGFloat!
+    
+    enum JSONError: String, ErrorType {
+        case NoData = "ERROR: no data"
+        case ConversionFailed = "ERROR: conversion from JSON failed"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +101,7 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         scrollViewContentSize += (photoHeight * CGFloat(photoInfoList.count))
 
         for i in 0..<photoInfoList.count {
+            getGeoCodeAddress(photoInfoList[i].location, index: i)
             let resizeCG = CGSizeMake(photoWidth, photoHeight)
             let resizedImage = imageResize(photoInfoList[i].photo, sizeChange: resizeCG)
             let imageRect = CGRect(x: startX, y: startY, width: photoWidth, height: photoHeight)
@@ -187,5 +195,30 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         // Only allow Portrait
         return UIInterfaceOrientation.Portrait
     }
+    
+    func getGeoCodeAddress(location:CLLocation, index:Int) ->String {
+        let latlng = String(location.coordinate.latitude) + "," + String(location.coordinate.longitude)
+        let urlPath = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=ko&latlng=" + latlng
+        guard let endpoint = NSURL(string: urlPath) else { print("Error creating endpoint");return NO_PLACE_NAME }
+        let request = NSMutableURLRequest(URL:endpoint)
+        NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) -> Void in
+            do {
+                guard let dat = data else { throw JSONError.NoData }
+                guard let json = try NSJSONSerialization.JSONObjectWithData(dat, options: []) as? NSDictionary else { throw JSONError.ConversionFailed }
+                if(json["status"] as! String == "OK") {
+                    let allResults = json["results"] as! Array<Dictionary<NSObject, AnyObject>>
+                    let lookupAddressResults = allResults[0] as Dictionary<NSObject, AnyObject>
+                    photoInfoList[index].address = lookupAddressResults["formatted_address"] as! String
+                }
+                
+            } catch let error as JSONError {
+                print(error.rawValue)
+            } catch {
+                print(error)
+            }
+            }.resume()
+        return NO_PLACE_NAME
+    }
+
 }
 
