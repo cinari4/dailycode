@@ -9,11 +9,6 @@
 import UIKit
 import Photos
 
-var photoInfoList:[PhotoInfo] = []
-var screenBounds = UIScreen.mainScreen().bounds
-let NO_PLACE_NAME = "The location could not be found."
-
-
 class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
 
     var imageView : UIImageView!
@@ -28,11 +23,6 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     var photoHeight : CGFloat!
     var labelWidth : CGFloat!
     var labelHeight : CGFloat!
-    
-    enum JSONError: String, ErrorType {
-        case NoData = "ERROR: no data"
-        case ConversionFailed = "ERROR: conversion from JSON failed"
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,17 +114,7 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         view.addSubview(label)
     }
     
-    /// 이미지 리사이즈
-    func imageResize (imageObj:UIImage, sizeChange:CGSize)-> UIImage{
-        let hasAlpha = false
-        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
-        
-        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
-        imageObj.drawInRect(CGRect(origin: CGPointZero, size: sizeChange))
-        
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-        return scaledImage
-    }
+    
     
     /// 과거의 오늘 사진의 url, image를 가져온다.
     func getTheDayPhotoList() {
@@ -196,29 +176,7 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         return UIInterfaceOrientation.Portrait
     }
     
-    func getGeoCodeAddress(location:CLLocation, index:Int) ->String {
-        let latlng = String(location.coordinate.latitude) + "," + String(location.coordinate.longitude)
-        let urlPath = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&language=ko&latlng=" + latlng
-        guard let endpoint = NSURL(string: urlPath) else { print("Error creating endpoint");return NO_PLACE_NAME }
-        let request = NSMutableURLRequest(URL:endpoint)
-        NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) -> Void in
-            do {
-                guard let dat = data else { throw JSONError.NoData }
-                guard let json = try NSJSONSerialization.JSONObjectWithData(dat, options: []) as? NSDictionary else { throw JSONError.ConversionFailed }
-                if(json["status"] as! String == "OK") {
-                    let allResults = json["results"] as! Array<Dictionary<NSObject, AnyObject>>
-                    let lookupAddressResults = allResults[0] as Dictionary<NSObject, AnyObject>
-                    photoInfoList[index].address = lookupAddressResults["formatted_address"] as! String
-                }
-                
-            } catch let error as JSONError {
-                print(error.rawValue)
-            } catch {
-                print(error)
-            }
-            }.resume()
-        return NO_PLACE_NAME
-    }
+    
 
 }
 

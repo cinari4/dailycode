@@ -20,6 +20,8 @@
 		FA8091911BDBC5EF008BB896 /* RememberTheDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8091901BDBC5EF008BB896 /* RememberTheDayTests.swift */; };
 		FA9068F21C04A4EF0030C8A4 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9068F11C04A4EF0030C8A4 /* DateUtils.swift */; settings = {ASSET_TAGS = (); }; };
 		FA9068F41C04A5D10030C8A4 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9068F31C04A5D10030C8A4 /* ImageViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		FA985DCD1C09F507002CD28A /* Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA985DCC1C09F507002CD28A /* Init.swift */; settings = {ASSET_TAGS = (); }; };
+		FA985DCF1C09F55F002CD28A /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA985DCE1C09F55F002CD28A /* ImageUtils.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		FA8091921BDBC5EF008BB896 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA9068F11C04A4EF0030C8A4 /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		FA9068F31C04A5D10030C8A4 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		FA985DCC1C09F507002CD28A /* Init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Init.swift; sourceTree = "<group>"; };
+		FA985DCE1C09F55F002CD28A /* ImageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +137,9 @@
 			children = (
 				FA4CD2851BDE572600FC226A /* resources */,
 				FA8091791BDBC5EF008BB896 /* AppDelegate.swift */,
+				FA985DCC1C09F507002CD28A /* Init.swift */,
 				FA80917B1BDBC5EF008BB896 /* FirstViewController.swift */,
+				FA985DCE1C09F55F002CD28A /* ImageUtils.swift */,
 				FA80917D1BDBC5EF008BB896 /* SecondViewController.swift */,
 				FA9068F11C04A4EF0030C8A4 /* DateUtils.swift */,
 				FA9068F31C04A5D10030C8A4 /* ImageViewController.swift */,
@@ -309,10 +315,12 @@
 			files = (
 				FA80917E1BDBC5EF008BB896 /* SecondViewController.swift in Sources */,
 				FA9068F21C04A4EF0030C8A4 /* DateUtils.swift in Sources */,
+				FA985DCD1C09F507002CD28A /* Init.swift in Sources */,
 				FA80917A1BDBC5EF008BB896 /* AppDelegate.swift in Sources */,
 				FA80917C1BDBC5EF008BB896 /* FirstViewController.swift in Sources */,
 				FA9068F41C04A5D10030C8A4 /* ImageViewController.swift in Sources */,
 				FA3CA7161BED2DB400E8C529 /* PhotoInfo.swift in Sources */,
+				FA985DCF1C09F55F002CD28A /* ImageUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
