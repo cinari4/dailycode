@@ -27,6 +27,32 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.Authorized {
+            createUI()
+        } else {
+            PHPhotoLibrary.requestAuthorization(requestAuthorizationHandler)
+        }
+    }
+    
+    func requestAuthorizationHandler(status: PHAuthorizationStatus)
+    {
+        if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.Authorized
+        {
+            executeInMainQueue({ self.createUI() })
+        }
+        else
+        {
+            executeInMainQueue({ self.loadDefaultImage() })
+        }
+    }
+    
+    func executeInMainQueue(function: () -> Void)
+    {
+        dispatch_async(dispatch_get_main_queue(), function)
+    }
+    
+    
+    func createUI() {
         setDisplayPoints()
         
         // get photo list
@@ -41,8 +67,8 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // add gesture on view
         addTapGesture()
-        
     }
+    
     
     // add tap Gesture
     func addTapGesture() {
