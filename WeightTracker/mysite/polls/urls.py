@@ -1,10 +1,10 @@
+from django.conf.urls import patterns, url 
+from polls import views
 
-from django.conf.urls import include, url
-from polls import view
-
-urlpatterns = [
+urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
-    url(r'^polls/(?P<question_id>\d+)/$', view.detail, name='detail'),
-    url(r'^polls/(?P<question_id>\d+)/vote/$', view.vote, name='vote'),
-    url(r'^polls/(?P<question_id>\d+)/results/$', view.results, name='results'),
- ]
+    url(r'^(?P<question_id>\d+)/$', views.detail, name='detail'),
+    url(r'^(?P<question_id>\d+)/results/$', views.results, name='results'),
+    url(r'^(?P<question_id>\d+)/vote/$', views.vote, name='vote'),
+)
+
