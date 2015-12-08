@@ -1,0 +1,4 @@
+[09/Dec/2015 00:47:00] DEBUG [polls.views:28] vote().question_id: 3
+[09/Dec/2015 00:47:02] DEBUG [polls.views:28] vote().question_id: 3
+[09/Dec/2015 00:47:11] DEBUG [polls.views:28] vote().question_id: 2
+[09/Dec/2015 00:47:16] DEBUG [polls.views:28] vote().question_id: 2
