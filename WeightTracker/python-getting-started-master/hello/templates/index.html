@@ -1,48 +1,187 @@
-{% extends "base.html" %}
-{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="cinari4@gmail.com">
+    <meta name="author" content="cinari4@gmail.com">
 
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="lang-logo">
-      <img src="{% static 'lang-logo.png'%}">
-    </a>
-    <h1>Getting Started with Python on Heroku</h1>
-    <p>This is a sample Python application deployed to Heroku. It's a reasonably simple app - but a good foundation for understanding how to get the most out of the Heroku platform.</p>
-    <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-python"><span class="glyphicon glyphicon-flash"></span> Getting Started with Python</a>
-    <a type="button" class="btn btn-lg btn-primary" href="https://github.com/heroku/python-getting-started"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
-  </div>
-</div>
-<div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-python" class="alert-link">Getting Started with Python on Heroku</a> tutorial.
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
-      <ul>
-        <li>This app was deployed to Heroku, either using Git or by using <a href="https://github.com/heroku/python-getting-started">Heroku Button</a> on the repository.</li>
+    <title>WeightTracker</title>
 
-        <li>When Heroku received the source code, it grabbed all the dependencies in the <a href="https://github.com/heroku/python-getting-started/blob/master/requirements.txt">requirements.txt file</a>.</li>
-        <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in which the slug can be mounted and executed.</li>
-        <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on services</a>, from the Dashboard or CLI.</li>
-        <li>Check out the <a href="https://devcenter.heroku.com/articles/getting-started-with-python">Getting Started</a> guide to learn more!</li>
-      </ul>
+    {% load staticfiles %}
+    <link href="{% static "scripts/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/sticky-footer-navbar.css" %}" rel="stylesheet">
+    <script src="{% static "scripts/jquery/jquery-2.1.4.js" %}"></script>
+    <script src="{% static "scripts/utils/convertutils.js" %}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#btnLbs").click(function() {
+                var result = lbsToKg($("#inputLbs").val());
+                if (result)
+                    $("#outputLbs").val(result + "kg");
+                else
+                    $("#outputLbs").val("");
+            });
+
+            $("#btnKg").click(function() {
+                var result = kgToLbs($("#inputKg").val());
+                if (result)
+                    $("#outputKg").val(result + "lbs");
+                else
+                    $("#outputKg").val("");
+            });
+
+            $("#btnPlate").click(function() {
+                var result = kgToBarbellPlate($("#inputPlate").val());
+                if (result)
+                    $("#outputPlate").text(result);
+                else
+                    $("#outputPlate").text("");
+            });
+
+            $("#divPlate").hide();
+
+            $("#menuConvert").click(function() {
+                $("#divConvert").show();
+                $("#divPlate").hide();
+                activateMenu("#menuConvert");
+            });
+
+            $("#menuPlate").click(function() {
+                $("#divConvert").hide();
+                $("#divPlate").show();    
+                activateMenu("#menuPlate");
+            });
+
+            $("#menuContact").click(function() {
+                $("#divConvert").hide();
+                $("#divPlate").hide();    
+                activateMenu("#menuContact");
+            });
+
+            $("#menuWorkoutDiary").click(function() {
+                $("#divConvert").hide();
+                $("#divPlate").hide();    
+                activateMenu("#menuWorkoutDiary");
+            });
+
+            function activateMenu(menuId) {
+                $("#menuConvert").removeClass("active");
+                $("#menuPlate").removeClass("active");
+                $("#menuContact").removeClass("active");
+                $("#menuWorkoutDiary").removeClass("active");
+                $(menuId).addClass("active");
+            }
+
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Weight Tracker</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active" id="menuConvert">
+                        <a href="#">무게변환(LBS/KG)</a>
+                    </li>
+                    <li id="menuPlate">
+                        <a href="#plate">원판갯수</a>
+                    </li>
+                    <li id="menuWorkoutDiary">
+                        <a href="#workdiary">운동일지</a>
+                    </li>
+                    <li id="menuContact">
+                        <a href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <!-- Begin page content -->
+    <div class="container">
+        <div id="divConvert">
+            <div class="page-header">
+                <h1> 무게변환 </h1>
+            </div>
+
+            <p class="lead"> LBS to KG </p>
+            <div class="row">
+                <div class="col-md-2">
+                    <input class="form-control" id="inputLbs" placeholder="lbs">
+                </div>
+                <div class="col-md-1">
+                    <input class="btn btn-default" id="btnLbs" type="button" value="convert">
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control" id="outputLbs">
+                </div>
+            </div>
+            <br /><br />
+
+            <p class="lead"> KG to LBS </p>
+            <div class="row">
+                <div class="col-md-2">
+                    <input class="form-control" id="inputKg" placeholder="kg">
+                </div>
+                <div class="col-md-1">
+                    <input class="btn btn-default" id="btnKg" type="button" value="convert">
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control" id="outputKg">
+                </div>
+            </div>
+            <br /><br />
+        </div>
+
+        <div id="divPlate">
+            <div class="page-header">
+                <h1> 바벨갯수 </h1>
+            </div>
+            <p class="lead"> how many barbell plate do I put on? target weight kg : </p>
+            <div class="row">
+                <div class="col-md-1">
+                    <input class="form-control" id="inputPlate" placeholder="kg">
+                </div>
+                <div class="col-md-1">
+                    <input class="btn btn-default" id="btnPlate" type="button" value="convert">
+                </div>
+                <div class="col-md-3">
+                    <textarea class="form-control" id="outputPlate" rows="10"></textarea>
+                </div>
+            </div>
+            <br /><br />
+        </div>
+
     </div>
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-      <ul>
-        <li><a href="https://www.heroku.com/home">Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-python">Getting Started with Python on Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/django-app-configuration">Configuring Django Apps for Heroku</a></li>
-      </ul>
-    </div>
-  </div> <!-- row -->
-   <div class="alert alert-info text-center" role="alert">
-    Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
-  </div>
-</div>
-{% endblock %}
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">
+                <a href="https://www.facebook.com/pzstrength?fref=ts">powerzone facebook</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
