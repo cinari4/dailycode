@@ -1,10 +1,13 @@
 # dailycode
 
-- iOSPractice  
-practice iOS 8 App Development
+- Playground  
+practice projects(django, swift)  
+
+- SlowDeepReading  
+analyzes open source(redis)
 
 - WeightTracker  
-A prototype website has kg<->lbs converter, workout diary (services on heroku)
+A prototype website has kg<->lbs converter, workout diary (will be services on heroku)  
 
 - RememberTheDay  
 toy project "A years ago today"  
