@@ -151,19 +151,19 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         
         fetchResult.enumerateObjectsUsingBlock { (object, _, _) in
             if let asset = object as? PHAsset {
-                if getTheDay(asset.creationDate!) == self.testDay1 || getTheDay(asset.creationDate!) == self.testDay2 {
+                if getTheDay(asset.creationDate!) == getTodayDate() {
                     let requestOptions = PHImageRequestOptions()
                     requestOptions.synchronous = true
                     PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: screenBounds.size, contentMode: PHImageContentMode.AspectFill, options: requestOptions) { (result, info)  in
                         if let photoURL = info!["PHImageFileURLKey"] as! NSURL? {
-                            let photo = NSData(contentsOfURL: photoURL)
                             var location:CLLocation!
                             if asset.location == nil {
                                 location = CLLocation(latitude: 0, longitude: 0)
                             } else {
                                 location = asset.location
                             }
-                            let photoInfoObj = PhotoInfo(photoURL: photoURL, photo:UIImage(data:photo!)!, location:location, creationDate:asset.creationDate!)
+                            
+                            let photoInfoObj = PhotoInfo(photoURL: photoURL, photo:result!, location:location, creationDate:asset.creationDate!)
                             photoInfoList.append(photoInfoObj)
                         }
                     }
