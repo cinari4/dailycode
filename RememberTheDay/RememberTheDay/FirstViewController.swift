@@ -12,8 +12,6 @@ import Photos
 class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
 
     var imageView : UIImageView!
-    var testDay1 = "08-08"
-    var testDay2 = "09-16"
     let scrollView = UIScrollView(frame: UIScreen.mainScreen().bounds)
     var scrollViewContentSize:CGFloat=0
     
@@ -113,7 +111,8 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // display photo to input view
     func displayThePhoto(view:UIView) {
-        scrollViewContentSize += startY * CGFloat(photoInfoList.count+1)
+        // +2 for revision button tabbar
+        scrollViewContentSize += startY * CGFloat(photoInfoList.count+2)
         scrollViewContentSize += (photoHeight * CGFloat(photoInfoList.count))
 
         for i in 0..<photoInfoList.count {
@@ -139,8 +138,6 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         label.text = getPhotoDay(creationDate)
         view.addSubview(label)
     }
-    
-    
     
     /// 과거의 오늘 사진의 url, image를 가져온다.
     func getTheDayPhotoList() {
@@ -186,23 +183,6 @@ class FirstViewController: UIViewController, UIGestureRecognizerDelegate {
         view.addSubview(imageView)
     }
 
-    override func shouldAutorotate() -> Bool {
-        // Lock autorotate
-        return false
-    }
-    
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        // Only allow Portrait
-        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.Portrait, UIInterfaceOrientationMask.PortraitUpsideDown]
-        return orientation
-    }
-
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        // Only allow Portrait
-        return UIInterfaceOrientation.Portrait
-    }
-    
-    
 
 }
 
