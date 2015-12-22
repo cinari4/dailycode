@@ -1,91 +1,88 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="cinari4@gmail.com">
-    <meta name="author" content="cinari4@gmail.com">
+    <head>
+        {% block metainfo %}
+        {% endblock %}
 
-    <title>WeightTracker</title>
+        <title>WeightTracker</title>
 
-    {% load staticfiles %}
-    <link href="{% static "scripts/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
-    <link href="{% static "css/sticky-footer-navbar.css" %}" rel="stylesheet">
-    <script src="{% static "scripts/jquery/jquery-2.1.4.js" %}"></script>
-    <script src="{% static "scripts/utils/convertutils.js" %}"></script>
+        {% load staticfiles %}
+        <link href="{% static "scripts/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+        <link href="{% static "css/sticky-footer-navbar.css" %}" rel="stylesheet">
+        <script src="{% static "scripts/jquery/jquery-2.1.4.js" %}"></script>
+        <script src="{% static "scripts/utils/convertutils.js" %}"></script>
 
-    <script>
-        $(document).ready(function() {
-            $("#btnLbs").click(function() {
-                var result = lbsToKg($("#inputLbs").val());
-                if (result)
-                    $("#outputLbs").val(result + "kg");
-                else
-                    $("#outputLbs").val("");
+        <script>
+            $(document).ready(function() {
+                $("#btnLbs").click(function() {
+                    var result = lbsToKg($("#inputLbs").val());
+                    if (result)
+                        $("#outputLbs").val(result + "kg");
+                    else
+                        $("#outputLbs").val("");
+                });
+
+                $("#btnKg").click(function() {
+                    var result = kgToLbs($("#inputKg").val());
+                    if (result)
+                        $("#outputKg").val(result + "lbs");
+                    else
+                        $("#outputKg").val("");
+                });
             });
+        </script>
 
-            $("#btnKg").click(function() {
-                var result = kgToLbs($("#inputKg").val());
-                if (result)
-                    $("#outputKg").val(result + "lbs");
-                else
-                    $("#outputKg").val("");
-            });
-        });
-    </script>
+    </head>
 
-</head>
+    <body>
 
-<body>
+        {% block navbar %}
+        {{ block.super }}
+        {% endblock %}
 
-    <!-- Begin page content -->
-    <div class="container">
-        <div id="divConvert">
-            <div class="page-header">
-                <h1> 무게변환 </h1>
-            </div>
-
-            <p class="lead"> LBS to KG </p>
-            <div class="row">
-                <div class="col-md-2">
-                    <input class="form-control" id="inputLbs" placeholder="lbs">
-                </div>
-                <div class="col-md-1">
-                    <input class="btn btn-default" id="btnLbs" type="button" value="convert">
-                </div>
-                <div class="col-md-2">
-                    <input class="form-control" id="outputLbs">
-                </div>
-            </div>
-            <br /><br />
-
-            <p class="lead"> KG to LBS </p>
-            <div class="row">
-                <div class="col-md-2">
-                    <input class="form-control" id="inputKg" placeholder="kg">
-                </div>
-                <div class="col-md-1">
-                    <input class="btn btn-default" id="btnKg" type="button" value="convert">
-                </div>
-                <div class="col-md-2">
-                    <input class="form-control" id="outputKg">
-                </div>
-            </div>
-            <br /><br />
-        </div>
-    </div>
-
-    <!-- footer -->
-    <footer class="footer">
+        <!-- Begin page content -->
+        {% block container %}
         <div class="container">
-            <p class="text-muted">
-                <a href="https://www.facebook.com/pzstrength?fref=ts">powerzone facebook</a>
-            </p>
+            <div id="divConvert">
+                <div class="page-header">
+                    <h1> 무게변환 </h1>
+                </div>
+
+                <p class="lead"> LBS to KG </p>
+                <div class="row">
+                    <div class="col-md-2">
+                        <input class="form-control" id="inputLbs" placeholder="lbs">
+                    </div>
+                    <div class="col-md-1">
+                        <input class="btn btn-default" id="btnLbs" type="button" value="convert">
+                    </div>
+                    <div class="col-md-2">
+                        <input class="form-control" id="outputLbs">
+                    </div>
+                </div>
+                <br /><br />
+
+                <p class="lead"> KG to LBS </p>
+                <div class="row">
+                    <div class="col-md-2">
+                        <input class="form-control" id="inputKg" placeholder="kg">
+                    </div>
+                    <div class="col-md-1">
+                        <input class="btn btn-default" id="btnKg" type="button" value="convert">
+                    </div>
+                    <div class="col-md-2">
+                        <input class="form-control" id="outputKg">
+                    </div>
+                </div>
+                <br /><br />
+            </div>
         </div>
-    </footer>
+        {% endblock %}
 
-</body>
-
+        {% block footer %}
+        {{ block.super }}
+        {% endblock %}
+    </body>
 </html>

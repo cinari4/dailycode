@@ -2,11 +2,13 @@
 <html lang="en">
 
 <head>
+    {% block metainfo %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="cinari4@gmail.com">
     <meta name="author" content="cinari4@gmail.com">
+    {% endblock %}
 
     <title>WeightTracker</title>
 
@@ -18,7 +20,7 @@
 </head>
 
 <body>
-    {% block topmenu %}
+    {% block navbar %}
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -51,6 +53,9 @@
             <!--/.nav-collapse -->
         </div>
     </nav>
+    {% endblock %}
+
+    {% block container %}
     {% endblock %}
    
     {% block footer %}
