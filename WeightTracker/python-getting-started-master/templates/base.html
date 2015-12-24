@@ -22,35 +22,26 @@
 <body>
     {% block navbar %}
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Weight Tracker</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active" id="menuConvert">
-                        <a href="#">무게변환(LBS/KG)</a>
-                    </li>
-                    <li id="menuPlate">
-                        <a href="#plate">원판갯수</a>
-                    </li>
-                    <li id="menuWorkoutDiary">
-                        <a href="#workdiary">운동일지</a>
-                    </li>
-                    <li id="menuContact">
-                        <a href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!--/.nav-collapse -->
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">WeightTracker</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li id="menuConvert">
+                    <a href="#convert">무게변환(LBS/KG)</a>
+                </li>
+                <li id="menuPlate">
+                    <a href="#plate">원판갯수</a>
+                </li>
+                <li id="menuWorkoutDiary">
+                    <a href="#workdiary">운동일지</a>
+                </li>
+                <li id="menuContact">
+                    <a href="#contact">Contact</a>
+                </li>
+            </ul>
         </div>
     </nav>
     {% endblock %}
