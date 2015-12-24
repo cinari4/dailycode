@@ -15,34 +15,7 @@
         <script src="{% static "scripts/jquery/jquery-2.1.4.js" %}"></script>
         <script src="{% static "scripts/utils/convertutils.js" %}"></script>
 
-        <script>
-        $(document).ready(function() {
-            console.log("test");
-            alert("test");
-            <!-- toggle menu -->
-            $( 'ul.nav li' ).on( 'click', function() {
-                $( this ).parent().find( 'li.active' ).removeClass( 'active' );
-                $( this ).addClass( 'active' );
-            });
-            
-            $("#btnLbs").click(function() {
-                alert("t");
-                var result = lbsToKg($("#inputLbs").val());
-                if (result)
-                    $("#outputLbs").val(result + "kg");
-                else
-                    $("#outputLbs").val("");
-            });
 
-            $("#btnKg").click(function() {
-                var result = kgToLbs($("#inputKg").val());
-                if (result)
-                    $("#outputKg").val(result + "lbs");
-                else
-                    $("#outputKg").val("");
-            });
-        });
-        </script>
 
     </head>
 
@@ -54,6 +27,32 @@
 
         <!-- Begin page content -->
         {% block container %}
+        <script>
+            $(document).ready(function() {
+                <!-- toggle menu -->
+                $( 'ul.nav li' ).on( 'click', function() {
+                    $( this ).parent().find( 'li.active' ).removeClass( 'active' );
+                    $( this ).addClass( 'active' );
+                });
+                
+                $("#btnLbs").click(function() {
+                    var result = lbsToKg($("#inputLbs").val());
+                    if (result)
+                        $("#outputLbs").val(result + "kg");
+                    else
+                        $("#outputLbs").val("");
+                });
+
+                $("#btnKg").click(function() {
+                    var result = kgToLbs($("#inputKg").val());
+                    if (result)
+                        $("#outputKg").val(result + "lbs");
+                    else
+                        $("#outputKg").val("");
+                });
+            });
+        </script>
+
         <div class="container">
             <div id="divConvert">
                 <div class="page-header">
