@@ -97,6 +97,34 @@
       the FB.login() function when clicked.
     -->
 
+    <a href="#" onclick="publishStory();">Publish feed story</a><br>
+    <a href="#" onclick="feedMessage();">feed Message</a><br>
+
+    <script>
+    function publishStory() {
+        FB.ui({
+          method: 'feed',
+          name: 'this is name.',
+          caption: 'this is caption',
+          description: 'this is description',
+          link: 'http://www.facebook.com',
+          picture: 'https://assets-cdn.github.com/images/modules/logos_page/Octocat.png'
+        }, 
+        function(response) {
+          console.log('publishStory response: ', response);
+        });
+
+        return false;
+    }
+    </script>
+
+    <script>
+        function feedMessage() {
+          FB.ui({ method: 'feed', 
+              caption: 'Facebook for Websites is super-cool'});
+        }
+    </script>
+
     <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
     </fb:login-button>
 
