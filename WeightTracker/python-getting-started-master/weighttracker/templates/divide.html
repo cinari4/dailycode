@@ -8,8 +8,47 @@
 {{ block.super }}
 {% endblock %}
 
+<!-- Begin page content -->
 {% block container %}
-{{ block.super }}
+    <script>
+        $(document).ready(function() {
+            <!-- toggle menu -->
+            $( 'ul.nav li' ).on( 'click', function() {
+                $( this ).parent().find( 'li.active' ).removeClass( 'active' );
+                $( this ).addClass( 'active' );
+            });
+            
+            $("#btnPlate").click(function() {
+                var result = kgToBarbellPlate($("#inputPlate").val());
+                if (result)
+                    $("#outputPlate").text(result);
+                else
+                    $("#outputPlate").text("");
+            });
+        });
+    </script>
+
+    <div class="container">
+        <div id="divPlate">
+            <div class="page-header">
+                <h1> 바벨갯수 </h1>
+            </div>
+            <p class="lead"> how many barbell plate do I put on? target weight kg : </p>
+            <div class="row">
+                <div class="col-md-1">
+                    <input class="form-control" id="inputPlate" placeholder="kg">
+                </div>
+                <div class="col-md-1">
+                    <input class="btn btn-default" id="btnPlate" type="button" value="convert">
+                </div>
+                <div class="col-md-3">
+                    <textarea class="form-control" id="outputPlate" rows="10"></textarea>
+                </div>
+            </div>
+            <br /><br />
+        </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block footer %}

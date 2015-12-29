@@ -30,16 +30,13 @@
         <div>
             <ul class="nav navbar-nav">
                 <li id="menuConvert">
-                    <a href="#convert">무게변환(LBS/KG)</a>
+                    <a href={% url 'weighttracker.views.convert' %}>무게변환(LBS/KG)</a>
                 </li>
                 <li id="menuPlate">
-                    <a href="#plate">원판갯수</a>
+                    <a href={% url 'weighttracker.views.divide' %}>원판갯수</a>
                 </li>
                 <li id="menuWorkoutDiary">
-                    <a href="#workdiary">운동일지</a>
-                </li>
-                <li id="menuContact">
-                    <a href="#contact">Contact</a>
+                    <a href={% url 'weighttracker.views.dailypost' %}>운동일지</a>
                 </li>
             </ul>
         </div>
