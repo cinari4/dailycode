@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block metainfo %}
+{{ block.super }}
+{% endblock %}
+
+{% block navbar %}
+{{ block.super }}
+{% endblock %}
+
+<!-- Begin page content -->
+{% block container %}
+    <script>
+        Parse.initialize("applicationId", "javascriptKey");
+
+        function testParse() {
+            var TestObject = Parse.Object.extend("TestObject");
+            var testObject = new TestObject();
+            testObject.save({foo: "bar"}).then(function(object) {
+                alert("yay! it worked");
+            });
+        }
+    </script>
+
+    <button type="button" onclick="testParse()">Click Me!</button>
+    </fb:login-button>
+
+    <div id="status">
+    </div>
+{% endblock %}
+
+{% block footer %}
+{{ block.super }}
+{% endblock %}

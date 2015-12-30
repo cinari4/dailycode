@@ -15,3 +15,6 @@ def divide(request):
 
 def dailypost(request):
     return render(request, 'dailypost.html')
+
+def parsetest(request):
+    return render(request, 'parsetest.html')

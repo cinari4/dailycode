@@ -15,4 +15,5 @@ urlpatterns = patterns('',
     url(r'^weighttracker/convert', weighttracker.views.convert, name='convert'),
     url(r'^weighttracker/divide', weighttracker.views.divide, name='divide'),
     url(r'^weighttracker/dailypost', weighttracker.views.dailypost, name='dailypost'),
+    url(r'^weighttracker/parsetest', weighttracker.views.parsetest, name='parsetest'),
 )
