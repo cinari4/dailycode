@@ -12,11 +12,8 @@
 {% block container %}
     <script>
         $(document).ready(function() {
-            <!-- toggle menu -->
-            $( 'ul.nav li' ).on( 'click', function() {
-                $( this ).parent().find( 'li.active' ).removeClass( 'active' );
-                $( this ).addClass( 'active' );
-            });
+            <!-- activate menu -->
+            $("#menuConvert").addClass('active');
             
             $("#btnLbs").click(function() {
                 var result = lbsToKg($("#inputLbs").val());
