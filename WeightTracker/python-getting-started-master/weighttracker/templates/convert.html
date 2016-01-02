@@ -15,21 +15,33 @@
             <!-- activate menu -->
             $("#menuConvert").addClass('active');
             
-            $("#btnLbs").click(function() {
-                var result = lbsToKg($("#inputLbs").val());
-                if (result)
-                    $("#outputLbs").val(result + "kg");
-                else
-                    $("#outputLbs").val("");
+            $("#btnConvert").click(function() {
+
+                var convUnit = $("#unitSelect").val();
+                var inputVal = $("#inputVal").val();
+                var result;
+
+                switch(convUnit) {
+                    case "1":
+                        result = kgToLbs(inputVal)
+                        if(result) {
+                            result = result + "lbs";    
+                        } else {
+                            return false;
+                        }
+                        break;
+                    case "2":
+                        result = lbsToKg(inputVal);
+                        if(result) {
+                            result = result + "kg";
+                        } else {
+                            return false;
+                        }
+                        break;
+                }
+                $("#outputVal").val(result);
             });
 
-            $("#btnKg").click(function() {
-                var result = kgToLbs($("#inputKg").val());
-                if (result)
-                    $("#outputKg").val(result + "lbs");
-                else
-                    $("#outputKg").val("");
-            });
         });
     </script>
 
@@ -39,32 +51,29 @@
                 <h1> 무게변환 </h1>
             </div>
 
-            <p class="lead"> LBS to KG </p>
             <div class="row">
                 <div class="col-md-2">
-                    <input class="form-control" id="inputLbs" placeholder="lbs">
+                    <input class="form-control" id="inputVal">
                 </div>
-                <div class="col-md-1">
-                    <input class="btn btn-default" id="btnLbs" type="button" value="convert">
-                </div>
-                <div class="col-md-2">
-                    <input class="form-control" id="outputLbs">
-                </div>
-            </div>
-            <br /><br />
 
-            <p class="lead"> KG to LBS </p>
-            <div class="row">
                 <div class="col-md-2">
-                    <input class="form-control" id="inputKg" placeholder="kg">
+                    <div class="form-group">
+                        <select class="form-control" id="unitSelect">
+                        <option value="1">kg->lbs</option>
+                        <option value="2">lbs->kg</option>
+                        </select>
+                    </div>
                 </div>
+
                 <div class="col-md-1">
-                    <input class="btn btn-default" id="btnKg" type="button" value="convert">
+                    <input class="btn btn-default" id="btnConvert" type="button" value="convert">
                 </div>
+
                 <div class="col-md-2">
-                    <input class="form-control" id="outputKg">
+                    <input class="form-control" id="outputVal">
                 </div>
             </div>
+
             <br /><br />
         </div>
     </div>

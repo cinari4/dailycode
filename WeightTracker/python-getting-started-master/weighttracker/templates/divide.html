@@ -16,11 +16,21 @@
             $("#menuDivide").addClass('active');
             
             $("#btnPlate").click(function() {
-                var result = kgToBarbellPlate($("#inputPlate").val());
-                if (result)
-                    $("#outputPlate").text(result);
-                else
-                    $("#outputPlate").text("");
+                var inputVal = $("#inputPlate").val(); 
+                var convUnit = $("#unitSelect").val(); 
+                var result;
+
+                switch(convUnit) {
+                    case "1":
+                        result = kgToBarbellPlate(inputVal);
+                        break;
+                    default:
+                        alert("not supported");
+                        return false;
+                        break;
+                }
+                $("#outputPlate").val(result);
+
             });
         });
     </script>
@@ -39,11 +49,11 @@
 
                 <div class="col-md-1">
                     <div class="form-group">
-                        <select class="form-control" id="sel1">
-                        <option value="kg">kg</option>
-                        <option value="kglbs">kg->lbs</option>
-                        <option value="lbs">lbs</option>
-                        <option value="lbskg">lbs->kg</option>
+                        <select class="form-control" id="unitSelect">
+                        <option value="1">kg</option>
+                        <option value="2">kg->lbs</option>
+                        <option value="3">lbs</option>
+                        <option value="4">lbs->kg</option>
                         </select>
                     </div>
                 </div>
