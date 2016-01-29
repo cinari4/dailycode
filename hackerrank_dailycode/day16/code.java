@@ -1,76 +1,29 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
-
-
-class TwoPair {
-	int smaller;
-	int bigger;
-	TwoPair(int a, int b) {
-		this.smaller = a;
-		this.bigger = b;
-	}
-}
+import java.io.*;
+import java.util.*;
 
 public class Solution {
-    public static void main(String[] args) {
-    	Scanner sc = new Scanner (System. in);
-        int cnt = sc .nextInt() ;
-        int arr[] = new int[ cnt];
-        int min = Integer.MAX_VALUE;
 
-        List<TwoPair> result = new ArrayList<TwoPair>();
+	public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		int T=sc.nextInt();
+		int[] arr = new int[T];
+		  
+		for(int i=0; i<T; i++)
+			arr[i] = sc.nextInt();
+		
+		check(arr);
 
-        for(int i =0; i<cnt ; i++ ) {
-          arr [i] = sc .nextInt() ;
-        }
-        
-        for(int i =0; i<cnt ; i++ ) {
-          for(int j =0; j<cnt ; j++ ) {
-             if(i ==j) continue;
-             int temp = Math .abs(arr[i]-arr[j]) ;
-             if(temp < min) {
-            	 min = temp;
-            	 result.clear();
-            	 addList(result, arr[i], arr[j]);
-             } else if( temp == min ) {
-            	 addList(result, arr[i], arr[j]);
-             }
-          }
-        }
-        
-        Collections.sort(result, new Comparator<TwoPair>() {
-			@Override
-			public int compare(TwoPair o1, TwoPair o2) {
-				return o1.smaller - o2.smaller;
-			}
-		});
-        
-        for(TwoPair pair : result) {
-        	System.out.print(pair.smaller + " " + pair.bigger + " ");
-        }
-    }
-    
-    public static void addList(List<TwoPair> result, int a, int b) {
-    	int small;
-    	int big;
-    	
-    	 if(a<b) {
-    		 small = a;
-    		 big = b;
-    	 } else {
-    		 small = b;
-    		 big = a;
-    	 } 
-    	 
-    	 for(TwoPair pair : result) {
-    		 if(small == pair.smaller)
-    			 return ;
-    	 }
-    	
-    	 result.add(new TwoPair(small, big));
-    }
+		
+	}
 
+	public static void check(int[] arr){
+		Arrays.sort(arr);
+		int abs = Integer.MAX_VALUE;
+		for (int i = arr.length - 1; i > 0; i--)
+			if(arr[i] - arr[i-1] < abs)
+				abs = arr[i] - arr[i-1];
+		for (int i = 1; i < arr.length - 1; i++) 
+			if(arr[i] - arr[i-1] == abs)
+				System.out.print(arr[i-1] + " " + arr[i] + " ");
+	}
 }
