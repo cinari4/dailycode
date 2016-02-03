@@ -13,15 +13,16 @@ public class Solution {
     }
     
     public static long getMaxPrime(long max) {
-        for(long i=max; i>2;) {
-            if(max%i==0 && i%2!=0) {
-                if(checkPrime(i))
-                    return i;
+        
+        if(checkPrime(max))
+            return max;
+        
+        for(long i=2;i<=max;i++) {
+            if(max%i==0) {
+                long temp = max/i;
+                if(checkPrime(temp))
+                    return temp;
             }
-            if(i%2!=0)
-                i=i-2;
-            else
-                i=i-1;
         }
         return 2;
     }
