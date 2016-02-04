@@ -14,11 +14,11 @@ public class Solution {
     
     private static int getMaxPalindromic(int num) {
     	int max =Integer.MIN_VALUE;
-    	for(int i=999; i>=100; i--) {
-    		for(int j=999; j>=100; j--) {
+    	outer:for(int i=100; i<1000; i++) {
+    		inner:for(int j=100; j<1000; j++) {
 				Integer temp = i*j;
 				if(temp>num)
-					continue;
+					break inner;
 				
 				if(isPalindromic(String.valueOf(temp))) {
 					max = Math.max(temp,max);
