@@ -7,41 +7,64 @@ public class Solution {
         
     	Scanner sc = new Scanner(System.in);
     	int max = sc.nextInt();
+    	
+    	List<Integer>palindromicList = getMaxPalindromicList();
+    	
+    	
     	while(max-->0) {
-    		System.out.println(getMaxPalindromic(sc.nextInt()));
+    		System.out.println(getMaxPalindromic(sc.nextInt(), palindromicList));
     	}
+    	
     }
     
-    private static int getMaxPalindromic(int num) {
-    	int max =Integer.MIN_VALUE;
-    	outer:for(int i=100; i<1000; i++) {
-    		inner:for(int j=100; j<1000; j++) {
-				Integer temp = i*j;
-				if(temp>num)
-					break inner;
-				
-				if(isPalindromic(String.valueOf(temp))) {
-					max = Math.max(temp,max);
+
+	private static int getMaxPalindromic(int num, List<Integer> palindromicList) {
+		Iterator iter = palindromicList.iterator();
+		int before = 0;
+		
+		if(palindromicList.contains(num))
+			return num;
+		
+		while(iter.hasNext()) {
+			int temp = (int)iter.next(); 
+			if(num<temp) {
+				return before;
+			} else {
+				before = temp;
+			}
+		}
+		
+		return 0;
+	}
+
+
+	private static List<Integer> getMaxPalindromicList() {
+    	List<Integer> palindromicList = new ArrayList<Integer>();  
+    	for(int i=100; i<1000; i++) {
+    		for(int j=100; j<1000; j++) {
+    			int temp = i*j;
+				if(isPalindrome(temp)) {
+					palindromicList.add(temp);
 				}
     		}
     	}
-    	return max;
+    	Collections.sort(palindromicList);
+    	return palindromicList;
     }
     
-	private static boolean isPalindromic(String num) {
-		if(num.length()!=6)
-			return false;
-		
-		char[] frontNum = num.substring(0, 3).toCharArray();
-		char[] behindeNum = num.substring(3, num.length()).toCharArray();
-		if(frontNum[2] == behindeNum[0]) {
-			if(frontNum[1] == behindeNum[1]) {
-				if(frontNum[0] == behindeNum[2]) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    public static boolean isPalindrome(int product) {
+        boolean isPalindrome=false;
+        if(product/100000==0)
+        	return false;
+       
+        String strProduct = String.valueOf(product);
+        
+        StringBuilder temp = new StringBuilder(strProduct).reverse();
+        if(temp.toString().equals(strProduct))
+        {
+            isPalindrome=true;
+        }
+        return isPalindrome;
+    }
     
 }
