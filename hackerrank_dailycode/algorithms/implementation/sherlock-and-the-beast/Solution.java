@@ -21,29 +21,37 @@ public class Solution {
     	}
     	
 		if(digit%3==0) {
-			System.out.println(makeIntWithDigit(5, digit));
+			System.out.println(makeIntWithDigit(3, digit/3));
 			return;
 		}
     
 		for(int i=digit/3; i>0; i--) {
-			if((digit%(3*i))%5==0) {
-				System.out.println(makeIntWithDigit(5, 3*i) + makeIntWithDigit(3, 5*(digit/3-i)));
+			if( (digit-(3*i)) %5 == 0) {
+				System.out.println(makeIntWithDigit(3, i) + makeIntWithDigit(5, (digit-(3*i))/5)); 
 				return;
 			}
 		}
 		
 		if(digit%5==0) {
-			System.out.println(makeIntWithDigit(3, digit));
+			System.out.println(makeIntWithDigit(5, digit/5));
 			return;
 		}
 		
 		System.out.println("-1");
     }
 	
-	private static String makeIntWithDigit(int num, int digit) {
-		long sum = 0;
-		for(int i=0; i<digit; i++)
-			sum += num*(Math.pow(10,i));
-		return String.valueOf(sum);
+	private static String makeIntWithDigit(int num, int cnt) {
+		StringBuilder sb = new StringBuilder();
+		if(num==3) {
+			for(int i=0; i<cnt; i++)
+				sb.append("555");
+				
+		} else if(num==5) {
+			for(int i=0; i<cnt; i++)
+				sb.append("33333");
+		}
+			
+		return sb.toString();
 	}
 }
+        
