@@ -15,13 +15,12 @@ Node Reverse(Node head) {
         return head;
     }
     
-    // get next node;
+    // get nextNode
     Node nextNode = head.next;
     head.next = null;
     
-    // get before node
+    // get lastNode(finally)
     Node newHead = Reverse(nextNode);
-    
     nextNode.next = head;
     return newHead;
 }
