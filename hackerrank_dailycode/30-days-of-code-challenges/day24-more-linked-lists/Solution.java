@@ -15,26 +15,21 @@ class Solution
 	public static Node removeDuplicates(Node head) {
 		Set<Integer> set = new HashSet<Integer>();
 		
-		Node tmp = head;
-		while (tmp != null) {
-			set.add(tmp.data);
-			tmp = tmp.next;
-		}
+		Node newHead = new Node(head.data);
+		set.add(head.data);
 		
-		Node retNode = null;
-		Node retPtrNode = null;
-		for (int data : set) {
-			if( retNode == null) {
-				retNode = new Node(data);
-				retPtrNode = retNode;
-			} else{
-				Node tmpNode = new Node(data);
-				retPtrNode.next = tmpNode;
-				retPtrNode = tmpNode;
+		Node newHeadPtr = newHead;
+		Node tmpNode = head;
+		while (tmpNode != null) {
+			if (!set.contains(tmpNode.data)) {
+				set.add(tmpNode.data);
+				newHeadPtr.next = new Node(tmpNode.data);
+				newHeadPtr = newHeadPtr.next; 
 			}
+			tmpNode = tmpNode.next;
 			
 		}
-		return retNode;
+		return newHead;
 	}
 	
 	public static  Node insert(Node head,int data)
