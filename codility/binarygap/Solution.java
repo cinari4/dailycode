@@ -6,8 +6,6 @@ import java.math.*;
 class Solution {
     public int solution(int num) {
 		int max = 0;
-		
-		int before = 0;
 		int tmpCnt = 0;
 		
 		String strBinary = Integer.toBinaryString(num);
