@@ -7,6 +7,7 @@ class Solution {
 		A[2] = 9;
 		A[3] = 7;
 		A[4] = 6;
+		
 		printArr(solution(A, 0));
 		printArr(solution(A, 1));
 		printArr(solution(A, 2));
@@ -16,6 +17,7 @@ class Solution {
 		printArr(solution(A, 6));
 		printArr(solution(A, 7));
 		System.out.println("========");
+		printArr(solution(A, 0));
 		printArr(solution(A, -1));
 		printArr(solution(A, -2));
 		printArr(solution(A, -3));
@@ -35,8 +37,14 @@ class Solution {
 			return A;
 		}
 		
+		if (A.length == 0) {
+			return A;
+		}
+		
 		if (K >= A.length) {
 			K = K % A.length;
+		} else if (K < 0) {
+			K = A.length + (K % A.length);
 		}
 		
 		int[] arr = new int[A.length];
