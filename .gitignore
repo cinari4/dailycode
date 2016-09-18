@@ -1,1 +1,5 @@
 WeightTracker/venv/*
+netty/chapter9/api-server/.classpath
+netty/chapter9/api-server/.project
+netty/chapter9/api-server/.settings/*
+netty/chapter9/api-server/target/*
