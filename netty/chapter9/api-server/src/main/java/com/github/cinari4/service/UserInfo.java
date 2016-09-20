@@ -27,13 +27,9 @@ public class UserInfo extends ApiRequestTemplate {
 	public void service() throws ServiceException {
 		this.apiResult.addProperty("resultCode", "200");
 		this.apiResult.addProperty("message", "Success");
-		this.apiResult.addProperty("userNo", getUserNo());
+		this.apiResult.addProperty("userNo", FakeUserInfo.USERNO);
 		
 		// if no data
 		// this.apiResult.addProperty("resultCode", "404");
-		}
-
-	private String getUserNo() {
-		return "1234";
 	}
 }
