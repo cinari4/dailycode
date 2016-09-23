@@ -3,3 +3,7 @@ netty/chapter9/api-server/.classpath
 netty/chapter9/api-server/.project
 netty/chapter9/api-server/.settings/*
 netty/chapter9/api-server/target/*
+designpattern/designpattern/.classpath
+designpattern/designpattern/.project
+designpattern/designpattern/.settings/*
+designpattern/designpattern/target/*
